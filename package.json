@@ -1,0 +1,20 @@
+{
+  "name": "TatKal-Booking-System",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Tejas1510/TatKal-Booking-System.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Tejas1510/TatKal-Booking-System/issues"
+  },
+  "homepage": "https://github.com/Tejas1510/TatKal-Booking-System#readme"
+}
