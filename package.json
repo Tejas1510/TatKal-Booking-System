@@ -16,5 +16,12 @@
   "bugs": {
     "url": "https://github.com/Tejas1510/TatKal-Booking-System/issues"
   },
-  "homepage": "https://github.com/Tejas1510/TatKal-Booking-System#readme"
+  "homepage": "https://github.com/Tejas1510/TatKal-Booking-System#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.13.5",
+    "nodemon": "^2.0.12"
+  }
 }
