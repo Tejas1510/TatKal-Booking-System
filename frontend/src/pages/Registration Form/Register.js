@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useRef} from 'react';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import Container from 'react-bootstrap/Container';
@@ -27,6 +27,10 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
+import SignaturePad from 'react-signature-canvas';
+import ClearIcon from '@material-ui/icons/Clear';
+import SaveIcon from '@material-ui/icons/Save';
+import VisibilityIcon from '@material-ui/icons/Visibility';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -63,6 +67,18 @@ function Register(){
   const handleChange = (event) => {
     setAge(event.target.value);
   };
+
+  let sigPad = useRef({});
+  let data='';
+  function clear(){
+    sigPad.current.clear();
+  }
+  function save(){
+     data= sigPad.current.toDataURL();
+  }
+  function show(){
+    sigPad.current.fromDataURL(data);
+  }
 
     return(
     <div>
@@ -251,7 +267,7 @@ function Register(){
                                 labelId="demo-simple-select-helper-label"
                                 id="demo-simple-select-helper"
                                 onChange={handleChange}
-                                value={age}>
+                                >
                                 <MenuItem value={"male"}>Male</MenuItem>
                                 <MenuItem value={"feamale"}>Female</MenuItem>
                               </Select>
@@ -265,7 +281,7 @@ function Register(){
                                 labelId="demo-simple-select-helper-label"
                                 id="demo-simple-select-helper"
                                 onChange={handleChange}
-                                value={age}>
+                                 >
                                 <MenuItem value={"l"}>Lower (L)</MenuItem>
                                 <MenuItem value={"m"}>Middle (M)</MenuItem>
                                 <MenuItem value={"u"}>Upper (U)</MenuItem>
@@ -310,7 +326,7 @@ function Register(){
                                     labelId="demo-simple-select-helper-label"
                                     id="demo-simple-select-helper"
                                     onChange={handleChange}
-                                    value={age}>
+                                    >
                                     <MenuItem value={"male"}>Male</MenuItem>
                                     <MenuItem value={"feamale"}>Female</MenuItem>
                                   </Select>
@@ -349,6 +365,24 @@ function Register(){
                         Upload Signature
                       </Button>
                     </label>
+                    <h6 className="text-center my-2">OR</h6>
+                    <h6 className="text-primary my-2">Digital Signature</h6>
+                    <div style={{border:"1px solid black"}}>
+                    <SignaturePad ref={sigPad} penColor="green"/>
+                    <div class="container-fluid" >
+                    <div class="row text-center m-1" >
+                      <div class="col-4" >
+                      <Button variant="contained" color="primary" onClick={clear} startIcon={<ClearIcon/>}>Clear</Button>
+                      </div>
+                      <div class="col-4">
+                      <Button variant="contained" color="primary" onClick={save} startIcon={<SaveIcon/>}>Save</Button>
+                      </div>
+                      <div class="col-4">
+                      <Button variant="contained" color="primary" onClick={show} startIcon={<VisibilityIcon/>}>Show</Button>
+                      </div>
+                    </div>
+                    </div>
+                    </div>
                </div>
 
              </div>
