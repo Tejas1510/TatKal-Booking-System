@@ -1,0 +1,17 @@
+.cell{
+    padding: 15px;
+    margin: 10px 5px;
+}
+
+.recordRow{
+    background-color: green;
+    margin-bottom: 10px;
+}
+
+.stripe1{
+    background-color: rgb(242, 242, 242);
+}
+
+.stripe2{
+    background-color: rgb(255, 255, 255);
+}

@@ -11,26 +11,30 @@ import {
 } from "react-router-dom";
 import Guideliness from './pages/GuideLiness/Guideliness';
 import Contact from './pages/ContactUs/Contact';
+import OTPOperator from './pages/OTPOperator/OTPOperator';
 
 function App() {
   return (
-    <Router>
-      <MainNavbar/>
-      <Switch>
-        <Route exact path ='/'>
-          <Register/>
-        </Route>
-        <Route  path ='/mainhomepage'>
-          <Home/>
-        </Route>
-        <Route  path ='/guideliness'>
-          <Guideliness/>
-        </Route>
-        <Route path ='/contactus'>
-          <Contact/>
-        </Route>
-      </Switch>
-    </Router>
+    <div>
+      <OTPOperator/>
+    </div>
+    // <Router>
+    //   <MainNavbar/>
+    //   <Switch>
+    //     <Route exact path ='/'>
+    //       <Register/>
+    //     </Route>
+    //     <Route  path ='/mainhomepage'>
+    //       <Home/>
+    //     </Route>
+    //     <Route  path ='/guideliness'>
+    //       <Guideliness/>
+    //     </Route>
+    //     <Route path ='/contactus'>
+    //       <Contact/>
+    //     </Route>
+    //   </Switch>
+    // </Router>
   );
 }
 
