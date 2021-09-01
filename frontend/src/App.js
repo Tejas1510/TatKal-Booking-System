@@ -15,26 +15,26 @@ import OTPOperator from './pages/OTPOperator/OTPOperator';
 
 function App() {
   return (
-    <div>
-      <OTPOperator/>
-    </div>
-    // <Router>
-    //   <MainNavbar/>
-    //   <Switch>
-    //     <Route exact path ='/'>
-    //       <Register/>
-    //     </Route>
-    //     <Route  path ='/mainhomepage'>
-    //       <Home/>
-    //     </Route>
-    //     <Route  path ='/guideliness'>
-    //       <Guideliness/>
-    //     </Route>
-    //     <Route path ='/contactus'>
-    //       <Contact/>
-    //     </Route>
-    //   </Switch>
-    // </Router>
+    // <div>
+    //   <OTPOperator/>
+    // </div>
+    <Router>
+      <MainNavbar/>
+      <Switch>
+        <Route exact path ='/'>
+          <Register/>
+        </Route>
+        <Route  path ='/mainhomepage'>
+          <Home/>
+        </Route>
+        <Route  path ='/guideliness'>
+          <Guideliness/>
+        </Route>
+        <Route path ='/contactus'>
+          <Contact/>
+        </Route>
+      </Switch>
+    </Router>
   );
 }
 

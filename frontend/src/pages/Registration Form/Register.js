@@ -1,4 +1,4 @@
-import React,{useRef} from 'react';
+import React, { useRef } from 'react';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import Container from 'react-bootstrap/Container';
@@ -31,6 +31,7 @@ import SignaturePad from 'react-signature-canvas';
 import ClearIcon from '@material-ui/icons/Clear';
 import SaveIcon from '@material-ui/icons/Save';
 import VisibilityIcon from '@material-ui/icons/Visibility';
+import axios from 'axios'
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -40,10 +41,10 @@ const useStyles = makeStyles((theme) => ({
   textField: {
     width: 200,
   },
-  formControl:{
+  formControl: {
     width: 200,
   },
-  formControl1:{
+  formControl1: {
     width: 80,
   },
   input: {
@@ -51,297 +52,457 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function createData(name, age, gender, berth) {
-  return { name, age, gender, berth};
-}
+function Register() {
 
-const rows = [
-  // createData('Yash Agrawal', 21, 'Male', 'L' ),
-
-];
-
-function Register(){
-  
   const classes = useStyles();
-  const [age, setAge] = React.useState('');
-  const handleChange = (event) => {
-    setAge(event.target.value);
-  };
+
+  // State for section 1 of registration form
+  const [userDetailState, setUserDetailState] = React.useState({
+    fullName: '',
+    dateOfBirth: '',
+    mobileNumber: '',
+    aadharNumber: '',
+    sourceStation: '',
+    destinationStation: '',
+    boardingStation: '',
+    reservationUpTo: ''
+  });
+
+  // State for section 2 of registration form
+  const [preferencesState, setPreferencesState] = React.useState({
+    train1: '',
+    train2: '',
+    train3: '',
+    allTrain: false,
+    class1: '',
+    class2: '',
+    class3: '',
+    allClass: false
+  });
+
+
+  // state for section 3 adult passengers
+  const [adultPassengersState, setAdultPassengersState] = React.useState({
+    rowCount: 1,
+    maxRowCount: 5,
+    passengers: [{ name: '', age: '', gender: '', berth: '' }]
+  });
+
+  // state for section 3 children passengers
+  const [childrenPassengersState, setChildrenPassengersState] = React.useState({
+    rowCount: 1,
+    maxRowCount: 3,
+    passengers: [{ name: '', age: '', gender: '', berth: '' }]
+  });
+
+  const addChildrenRow = () => {
+    if (childrenPassengersState.rowCount < childrenPassengersState.maxRowCount) {
+      setChildrenPassengersState({
+        ...childrenPassengersState,
+        rowCount: childrenPassengersState.rowCount + 1,
+        passengers: [...childrenPassengersState.passengers, { name: '', age: '', gender: '' }]
+      });
+    }
+  }
+
+  const deleteChildrenRow = (index) => {
+    let newState = [...childrenPassengersState.passengers];
+    newState.splice(index, 1);
+
+    setChildrenPassengersState({
+      ...childrenPassengersState,
+      rowCount: childrenPassengersState.rowCount - 1,
+      passengers: newState
+    });
+  }
+
+  const addPassengerRow = () => {
+    if (adultPassengersState.rowCount < adultPassengersState.maxRowCount) {
+      setAdultPassengersState({
+        ...adultPassengersState,
+        rowCount: adultPassengersState.rowCount + 1,
+        passengers: [...adultPassengersState.passengers, { name: '', age: '', gender: '', berth: '' }]
+      });
+    }
+  }
+
+  const deletePassengerRow = (index) => {
+    let newState = [...adultPassengersState.passengers];
+    newState.splice(index, 1);
+
+    setAdultPassengersState({
+      ...adultPassengersState,
+      rowCount: adultPassengersState.rowCount - 1,
+      passengers: newState
+    });
+  }
+
+  const handleTextFieldChange = (event, setStateMethod, initialState) => {
+    //console.log("handleTextField", event.target);
+    setStateMethod({ ...initialState, [event.target.name]: event.target.value });
+  }
+
+  const handleCheckboxChange = (event, setStateMethod, initialState) => {
+    //console.log("handleCheckbox", event.target.checked);
+    setStateMethod({ ...initialState, [event.target.name]: event.target.checked });
+  }
+
+  const handleTableRowChange = (event, setStateMethod, initialState, index) => {
+    //console.log("handleTextField", event.target);
+    let newState = initialState.passengers;
+    const propName = event.target.name.split("-")[0];
+    newState[index] = { ...newState[index], [propName]: event.target.value }
+    setStateMethod({ ...initialState, passengers: newState });
+  }
+
+  const handleFormSubmission = (event) => {
+    console.log("Form Submitted");
+    const completeForm = {
+      fullName: userDetailState.fullName,
+      dateOfBirth: userDetailState.dateOfBirth,
+      sourceStation: userDetailState.sourceStation,
+      destinationStation: userDetailState.destinationStation,
+      boardingStation: userDetailState.boardingStation,
+      reservationUpTo: userDetailState.reservationUpTo,
+      aadharNumber: userDetailState.aadharNumber,
+
+      prefernceTrain: {
+        train1: preferencesState.train1,
+        train2: preferencesState.train2,
+        train3: preferencesState.train3,
+        allTrain: preferencesState.allTrain
+      },
+      prefernceClass: {
+        class1: preferencesState.class1,
+        class2: preferencesState.class2,
+        class3: preferencesState.class3,
+        allClass: preferencesState.allClass
+      },
+
+      passengerDetail: adultPassengersState.passengers,
+      childrenDetail: childrenPassengersState.passengers,
+      signature: "sss121"
+    };
+    console.log(completeForm);
+    const res = axios.post('http://localhost:5000/api/userdata/register', completeForm)
+      .then((response) => {
+        console.log("response", response);
+      });
+  }
+
 
   let sigPad = useRef({});
-  let data='';
-  function clear(){
+  let data = '';
+  function clear() {
     sigPad.current.clear();
   }
-  function save(){
-     data= sigPad.current.toDataURL();
+  function save() {
+    data = sigPad.current.toDataURL();
+    console.log("signData", data);
   }
-  function show(){
+  function show() {
     sigPad.current.fromDataURL(data);
   }
 
-    return(
+  return (
     <div>
 
-    {/* Header Section */}
-        
+      {/* Header Section */}
+
+      <div className="container my-5 pb-5 shadow" style={{ backgroundColor: "orange", borderRadius: "8px" }}>
+
+        <center><h1 style={{ backgroundColor: "#00004d" }} className="container shadow my-3 p-2 text-white" >Tatkal Form</h1></center>
 
 
-      <div className="container my-5 pb-5 shadow" style={{backgroundColor:"orange",borderRadius:"8px"}}>
-        
-        <center><h1 style={{backgroundColor:"#00004d"}} className="container shadow my-3 p-2 text-white" >Tatkal Form</h1></center>
-
-      
-        <Card style={{width: "80%",margin:"auto",backgroundColor:"white"}} className="p-2 shadow">
-            <CardContent>
-            <form style={{textAlign:"left"}}>
-            <h5 style={{color:"#00004d"}}>1. User Details</h5>
-             <div class="row">
-               <div class="col-sm-3 col-12 my-2">
-               <TextField id="standard-basic" label="Full Name" />
-               </div>
-               <div class="col-sm-3 col-12 my-2">
-                    <TextField
-                    id="date"
+        <Card style={{ width: "80%", margin: "auto", backgroundColor: "white" }} className="p-2 shadow">
+          <CardContent>
+            <form style={{ textAlign: "left" }}>
+              <h5 style={{ color: "#00004d" }}>1. User Details</h5>
+              <div className="row">
+                <div className="col-sm-3 col-12 my-2">
+                  <TextField id="fullName" onBlur={(event) => { handleTextFieldChange(event, setUserDetailState, userDetailState) }} defaultValue={userDetailState.fullName} name="fullName" label="Full Name" />
+                </div>
+                <div className="col-sm-3 col-12 my-2">
+                  <TextField
+                    id="dateOfBirth"
                     label="Date of Birth"
                     type="date"
-                    defaultValue="2017-05-24"
+                    name="dateOfBirth"
+                    onBlur={(event) => { handleTextFieldChange(event, setUserDetailState, userDetailState) }}
+                    defaultValue={userDetailState.dateOfBirth}
                     className={classes.textField}
                     InputLabelProps={{
                       shrink: true,
                     }}
                   />
-               </div>
+                </div>
 
-               <div class="col-sm-3 col-12 my-2">
-               <TextField id="standard-basic" label="Mobile Number" />
-               </div>
+                <div className="col-sm-3 col-12 my-2">
+                  <TextField id="mobileNumber" name="mobileNumber" onBlur={(event) => { handleTextFieldChange(event, setUserDetailState, userDetailState) }}
+                    defaultValue={userDetailState.mobileNumber} label="Mobile Number" />
+                </div>
 
-               <div class="col-sm-3 col-12 my-2">
-               <TextField id="standard-basic" label="Aadhar Number" />
-               </div>
+                <div className="col-sm-3 col-12 my-2">
+                  <TextField id="aadharNumber" name="aadharNumber" onBlur={(event) => { handleTextFieldChange(event, setUserDetailState, userDetailState) }}
+                    defaultValue={userDetailState.aadharNumber} label="Aadhar Number" />
+                </div>
 
-             </div>
-             
+              </div>
 
-             {/* 2nd row */}
 
-             <div class="row">
-               <div class="col-sm-3 col-12 my-2">
-               <TextField id="standard-basic" label="Source Station" />
-               </div>
-               <div class="col-sm-3 col-12 my-2">
-               <TextField id="standard-basic" label="Destination Station" />
-               </div>
+              {/* 2nd row */}
 
-               <div class="col-sm-3 col-12 my-2">
-               <TextField id="standard-basic" label="Boarding Station" />
-               </div>
+              <div className="row">
+                <div className="col-sm-3 col-12 my-2">
+                  <TextField id="sourceStation" name="sourceStation" onBlur={(event) => { handleTextFieldChange(event, setUserDetailState, userDetailState) }}
+                    defaultValue={userDetailState.sourceStation} label="Source Station" />
+                </div>
+                <div className="col-sm-3 col-12 my-2">
+                  <TextField id="destinationStation" name="destinationStation" onBlur={(event) => { handleTextFieldChange(event, setUserDetailState, userDetailState) }}
+                    defaultValue={userDetailState.destinationStation} label="Destination Station" />
+                </div>
 
-               <div class="col-sm-3 col-12 my-2">
-               <TextField id="standard-basic" label="Reservation Up To" />
-               </div>
+                <div className="col-sm-3 col-12 my-2">
+                  <TextField id="boardingStation" name="boardingStation" onBlur={(event) => { handleTextFieldChange(event, setUserDetailState, userDetailState) }}
+                    defaultValue={userDetailState.boardingStation} label="Boarding Station" />
+                </div>
 
-             </div>
-              
+                <div className="col-sm-3 col-12 my-2">
+                  <TextField id="reservationUpTo" name="reservationUpTo" onBlur={(event) => { handleTextFieldChange(event, setUserDetailState, userDetailState) }}
+                    defaultValue={userDetailState.reservationUpTo} label="Reservation Up To" />
+                </div>
+
+              </div>
+
               {/* Preferences Section */}
-             <Divider variant="middle" className="my-3" style={{fontWeight:"5px",color:"black"}}/>
+              <Divider variant="middle" className="my-3" style={{ fontWeight: "5px", color: "black" }} />
 
-             <h5 style={{color:"#00004d"}}>2. Preferences</h5>
-            
-             <div class="row">
-                <div class="col-sm-3 col-12 my-2">
-                    <h6>Preference for Trains:</h6>
-                    <br/>
-                    <FormControlLabel
-                        control={<Checkbox onChange={handleChange} name="checkedA" />}
-                        label="Any Possible Train"
-                      />
+              <h5 style={{ color: "#00004d" }}>2. Preferences</h5>
+
+              <div className="row">
+                <div className="col-sm-3 col-12 my-2">
+                  <h6>Preference for Trains:</h6>
+                  <br />
+                  <FormControlLabel
+                    control={<Checkbox onChange={(event) => { handleCheckboxChange(event, setPreferencesState, preferencesState) }} checked={preferencesState.allTrain} name="allTrain" />}
+                    label="Any Possible Train"
+                  />
                 </div>
-               <div class="col-sm-3 col-12 my-2">
-               <TextField id="standard-basic" label="Enter Train No." helperText="Preference 1" />
-               </div>
-               <div class="col-sm-3 col-12 my-2">
-               <TextField id="standard-basic" label="Enter Train No." helperText="Preference 2" />
-               </div>
-               <div class="col-sm-3 col-12 my-2">
-               <TextField id="standard-basic" label="Enter Train No." helperText="Preference 3" />
-               </div>
-             </div>
-  
-             <div class="row">
-                <div class="col-sm-3 col-12 my-2">
-                    <h6>Preference for Class:</h6>
-                    <br/>
-                    <FormControlLabel
-                        control={<Checkbox onChange={handleChange} name="checkedB" />}
-                        label="Any Class"
-                      />
+                <div className="col-sm-3 col-12 my-2">
+                  <TextField id="train1" name="train1" onBlur={(event) => { handleTextFieldChange(event, setPreferencesState, preferencesState) }}
+                    defaultValue={preferencesState.train1} disabled={preferencesState.allTrain} label="Enter Train No. 1" helperText="Preference 1" />
                 </div>
-               <div class="col-sm-3 col-12 my-2">
-               <FormControl className={classes.formControl}>
-                    <InputLabel id="demo-simple-select-helper-label">Class Preference 1</InputLabel>
-                    <Select
-                      labelId="demo-simple-select-helper-label"
-                      id="demo-simple-select-helper"
-                      onChange={handleChange}
-                      value={age}>
-                      <MenuItem value={10}>AC First Class (1AC)</MenuItem>
-                      <MenuItem value={20}>AC 2 Tier (2AC)</MenuItem>
-                      <MenuItem value={30}>AC 3 Tier (3AC)</MenuItem>
-                      <MenuItem value={40}>Sleeper (SL)</MenuItem>
-                      <MenuItem value={50}>AC Chair Car (CC)</MenuItem>
-                    </Select>
-                  
-                  </FormControl>
-               </div>
+                <div className="col-sm-3 col-12 my-2">
+                  <TextField id="train2" name="train2" onBlur={(event) => { handleTextFieldChange(event, setPreferencesState, preferencesState) }}
+                    defaultValue={preferencesState.train2} disabled={preferencesState.allTrain} label="Enter Train No. 2" helperText="Preference 2" />
+                </div>
+                <div className="col-sm-3 col-12 my-2">
+                  <TextField id="train3" name="train3" onBlur={(event) => { handleTextFieldChange(event, setPreferencesState, preferencesState) }}
+                    defaultValue={preferencesState.train3} disabled={preferencesState.allTrain} label="Enter Train No. 3" helperText="Preference 3" />
+                </div>
+              </div>
 
-               <div class="col-sm-3 col-12 my-2">
-               <FormControl className={classes.formControl}>
-                    <InputLabel id="demo-simple-select-helper-label">Class Preference 2</InputLabel>
+              <div className="row">
+                <div className="col-sm-3 col-12 my-2">
+                  <h6>Preference for Class:</h6>
+                  <br />
+                  <FormControlLabel
+                    control={<Checkbox onChange={(event) => { handleCheckboxChange(event, setPreferencesState, preferencesState) }} checked={preferencesState.allClass} name="allClass" />}
+                    label="Any Class"
+                  />
+                </div>
+                <div className="col-sm-3 col-12 my-2">
+                  <FormControl className={classes.formControl}>
+                    <InputLabel id="classPref1">Class Preference 1</InputLabel>
                     <Select
-                      labelId="demo-simple-select-helper-label"
-                      id="demo-simple-select-helper"
-                      onChange={handleChange}
-                      
-                      value={age}>
-                      <MenuItem value={10}>AC First Class (1AC)</MenuItem>
-                      <MenuItem value={20}>AC 2 Tier (2AC)</MenuItem>
-                      <MenuItem value={30}>AC 3 Tier (3AC)</MenuItem>
-                      <MenuItem value={40}>Sleeper (SL)</MenuItem>
-                      <MenuItem value={50}>AC Chair Car (CC)</MenuItem>
+                      id="class1"
+                      name="class1"
+                      disabled={preferencesState.allClass}
+                      value={preferencesState.class1}
+                      onChange={(event) => { handleTextFieldChange(event, setPreferencesState, preferencesState) }}>
+                      <MenuItem value={"10"}>AC First Class (1AC)</MenuItem>
+                      <MenuItem value={"20"}>AC 2 Tier (2AC)</MenuItem>
+                      <MenuItem value={"30"}>AC 3 Tier (3AC)</MenuItem>
+                      <MenuItem value={"40"}>Sleeper (SL)</MenuItem>
+                      <MenuItem value={"50"}>AC Chair Car (CC)</MenuItem>
                     </Select>
-                    
                   </FormControl>
-               </div>
+                </div>
 
-               <div class="col-sm-3 col-12 my-2">
-               <FormControl className={classes.formControl}>
-                    <InputLabel id="demo-simple-select-helper-label">Class Preference 3</InputLabel>
+                <div className="col-sm-3 col-12 my-2">
+                  <FormControl className={classes.formControl}>
+                    <InputLabel id="classPref2">Class Preference 2</InputLabel>
                     <Select
-                      labelId="demo-simple-select-helper-label"
-                      id="demo-simple-select-helper"
-                      onChange={handleChange}
-                      value={age}>
-                      <MenuItem value={10}>AC First Class (1AC)</MenuItem>
-                      <MenuItem value={20}>AC 2 Tier (2AC)</MenuItem>
-                      <MenuItem value={30}>AC 3 Tier (3AC)</MenuItem>
-                      <MenuItem value={40}>Sleeper (SL)</MenuItem>
-                      <MenuItem value={50}>AC Chair Car (CC)</MenuItem>
+                      id="class2"
+                      name="class2"
+                      disabled={preferencesState.allClass}
+                      value={preferencesState.class2}
+                      onChange={(event) => { handleTextFieldChange(event, setPreferencesState, preferencesState) }}>
+                      <MenuItem value={"10"}>AC First Class (1AC)</MenuItem>
+                      <MenuItem value={"20"}>AC 2 Tier (2AC)</MenuItem>
+                      <MenuItem value={"30"}>AC 3 Tier (3AC)</MenuItem>
+                      <MenuItem value={"40"}>Sleeper (SL)</MenuItem>
+                      <MenuItem value={"50"}>AC Chair Car (CC)</MenuItem>
                     </Select>
-                    
                   </FormControl>
-               </div>
-             </div>
-              
+                </div>
+
+                <div className="col-sm-3 col-12 my-2">
+                  <FormControl className={classes.formControl}>
+                    <InputLabel id="classPref3">Class Preference 3</InputLabel>
+                    <Select
+                      id="class3"
+                      name="class3"
+                      disabled={preferencesState.allClass}
+                      value={preferencesState.class3}
+                      onChange={(event) => { handleTextFieldChange(event, setPreferencesState, preferencesState) }}>
+                      <MenuItem value={"10"}>AC First Class (1AC)</MenuItem>
+                      <MenuItem value={"20"}>AC 2 Tier (2AC)</MenuItem>
+                      <MenuItem value={"30"}>AC 3 Tier (3AC)</MenuItem>
+                      <MenuItem value={"40"}>Sleeper (SL)</MenuItem>
+                      <MenuItem value={"50"}>AC Chair Car (CC)</MenuItem>
+                    </Select>
+                  </FormControl>
+                </div>
+              </div>
+
 
               {/* Passenger Section */}
-             <Divider variant="middle" className="my-3" style={{fontWeight:"5px",color:"black"}}/>
+              <Divider variant="middle" className="my-3" style={{ fontWeight: "5px", color: "black" }} />
 
-             <h5 style={{color:"#00004d"}}>3. Passenger Details</h5>
-             <div class="row">
-               <div class="col-sm-7 col-12">
-                
-               <TableContainer component={Paper}>
-                  <Table className={classes.table} aria-label="simple table">
-                    <TableHead style={{backgroundColor:"orange"}}>
-                      <TableRow>
-                        <TableCell>Name</TableCell>
-                        <TableCell>Age</TableCell>
-                        <TableCell>Gender</TableCell>
-                        <TableCell>Berth Preference</TableCell>
-                        
-                      </TableRow>
-                    </TableHead>
-                    <TableBody>
-                      {[...Array(6)].map((row,index) => (
-                        <TableRow key={index}>
-                          <TableCell>
-                          <TextField id="standard-basic" label="Name" />
-                          </TableCell>
-                          <TableCell><TextField id="standard-basic" label="Age" /></TableCell>
-                          <TableCell>
-                          <FormControl className={classes.formControl1}>
-                              <InputLabel id="demo-simple-select-helper-label">Gender</InputLabel>
-                              <Select
-                                labelId="demo-simple-select-helper-label"
-                                id="demo-simple-select-helper"
-                                onChange={handleChange}
-                                >
-                                <MenuItem value={"male"}>Male</MenuItem>
-                                <MenuItem value={"feamale"}>Female</MenuItem>
-                              </Select>
-                    
-                          </FormControl>
-                          </TableCell>
-                          <TableCell>
-                          <FormControl className={classes.formControl1}>
-                              <InputLabel id="demo-simple-select-helper-label">Berth</InputLabel>
-                              <Select
-                                labelId="demo-simple-select-helper-label"
-                                id="demo-simple-select-helper"
-                                onChange={handleChange}
-                                 >
-                                <MenuItem value={"l"}>Lower (L)</MenuItem>
-                                <MenuItem value={"m"}>Middle (M)</MenuItem>
-                                <MenuItem value={"u"}>Upper (U)</MenuItem>
-                                <MenuItem value={"su"}>Side Upper (SU)</MenuItem>
-                                <MenuItem value={"sl"}>Side Lower (SL)</MenuItem>
-                              </Select>
-                    
-                          </FormControl>
-                          </TableCell>
-                          
+              <h5 style={{ color: "#00004d" }}>3. Passenger Details</h5>
+              <div className="row">
+                <div className="col-sm-7 col-12">
+
+                  <TableContainer component={Paper}>
+                    <Table className={classes.table} aria-label="simple table">
+                      <TableHead style={{ backgroundColor: "orange" }}>
+                        <TableRow>
+                          <TableCell>Name</TableCell>
+                          <TableCell>Age</TableCell>
+                          <TableCell>Gender</TableCell>
+                          <TableCell>Berth Preference</TableCell>
+                          <TableCell>Delete Row</TableCell>
                         </TableRow>
-                      ))}
-                    </TableBody>
-                  </Table>
-                </TableContainer>
-               </div>
+                      </TableHead>
+                      <TableBody>
+                        {adultPassengersState.passengers.map((row, index) => (
+                          <TableRow key={index}>
+                            <TableCell>
+                              <TextField id={`name-${index}`} value={adultPassengersState.passengers[index].name} onChange={(event) => { handleTableRowChange(event, setAdultPassengersState, adultPassengersState, index) }} name={`name-${index}`} label="Name" />
+                            </TableCell>
+                            <TableCell><TextField id={`age-${index}`} name={`age-${index}`} value={adultPassengersState.passengers[index].age} onChange={(event) => { handleTableRowChange(event, setAdultPassengersState, adultPassengersState, index) }} label="Age" /></TableCell>
+                            <TableCell>
+                              <FormControl className={classes.formControl1}>
+                                <InputLabel id={`genderlabel-${index}`}>Gender</InputLabel>
+                                <Select
+                                  labelId={`label-gender-${index}`}
+                                  id={`gender-${index}`} name={`gender-${index}`}
+                                  value={adultPassengersState.passengers[index].gender} onChange={(event) => { handleTableRowChange(event, setAdultPassengersState, adultPassengersState, index) }}
+                                >
+                                  <MenuItem value={"male"}>Male</MenuItem>
+                                  <MenuItem value={"female"}>Female</MenuItem>
+                                </Select>
+
+                              </FormControl>
+                            </TableCell>
+                            <TableCell>
+                              <FormControl className={classes.formControl1}>
+                                <InputLabel id="demo-simple-select-helper-label">Berth</InputLabel>
+                                <Select
+                                  labelId="demo-simple-select-helper-label"
+                                  id={`berth-${index}`} name={`berth-${index}`}
+                                  value={adultPassengersState.passengers[index].berth} onChange={(event) => { handleTableRowChange(event, setAdultPassengersState, adultPassengersState, index) }}
+                                >
+                                  <MenuItem value={"l"}>Lower (L)</MenuItem>
+                                  <MenuItem value={"m"}>Middle (M)</MenuItem>
+                                  <MenuItem value={"u"}>Upper (U)</MenuItem>
+                                  <MenuItem value={"su"}>Side Upper (SU)</MenuItem>
+                                  <MenuItem value={"sl"}>Side Lower (SL)</MenuItem>
+                                </Select>
+
+                              </FormControl>
+                            </TableCell>
+
+                            <TableCell>
+                              <Button variant="contained" onClick={() => { deletePassengerRow(index) }} color="primary">Delete Row</Button>
+                            </TableCell>
+
+                          </TableRow>
+                        ))}
+                      </TableBody>
+                    </Table>
+                  </TableContainer>
+
+                  <div className="row mt-3">
+                    <div className="col-12 col-sm-6">
+                      <Button variant="contained" color="primary" onClick={addPassengerRow}>Add Row</Button>
+                    </div>
+                    <div className="col-12 col-sm-6">
+                      <p>(Max. 5 Passengers)</p>
+                    </div>
+                  </div>
+
+                </div>
 
 
-               <div class="col-sm-5 col-12">
+                <div className="col-sm-5 col-12">
                   <h6>For children (Below 5 years):</h6>
                   <TableContainer component={Paper}>
-                      <Table className={classes.table} aria-label="simple table">
-                        <TableHead style={{backgroundColor:"orange"}}>
-                          <TableRow>
-                            <TableCell>Name</TableCell>
-                            <TableCell>Age</TableCell>
-                            <TableCell>Gender</TableCell>
-                            
-                          </TableRow>
-                        </TableHead>
-                        <TableBody>
-                          {[...Array(3)].map((row,index) => (
-                            <TableRow key={index}>
-                              <TableCell>
-                              <TextField id="standard-basic" label="Name" />
-                              </TableCell>
-                              <TableCell><TextField id="standard-basic" label="Age" /></TableCell>
-                              <TableCell>
-                              <FormControl className={classes.formControl1}>
-                                  <InputLabel id="demo-simple-select-helper-label">Gender</InputLabel>
-                                  <Select
-                                    labelId="demo-simple-select-helper-label"
-                                    id="demo-simple-select-helper"
-                                    onChange={handleChange}
-                                    >
-                                    <MenuItem value={"male"}>Male</MenuItem>
-                                    <MenuItem value={"feamale"}>Female</MenuItem>
-                                  </Select>
-                        
-                              </FormControl>
-                              </TableCell>
-                              
-                            </TableRow>
-                          ))}
-                        </TableBody>
-                      </Table>
-                    </TableContainer>
-                         
+                    <Table className={classes.table} aria-label="simple table">
+                      <TableHead style={{ backgroundColor: "orange" }}>
+                        <TableRow>
+                          <TableCell>Name</TableCell>
+                          <TableCell>Age</TableCell>
+                          <TableCell>Gender</TableCell>
+                          <TableCell>Delete Row</TableCell>
 
-                    <TextField
+                        </TableRow>
+                      </TableHead>
+                      <TableBody>
+                        {childrenPassengersState.passengers.map((row, index) => (
+                          <TableRow key={index}>
+                            <TableCell>
+                              <TextField id={`childrenName-${index}`} name={`name-${index}`} value={childrenPassengersState.passengers[index].name} onChange={(event) => { handleTableRowChange(event, setChildrenPassengersState, childrenPassengersState, index) }} label="Name" />
+                            </TableCell>
+                            <TableCell><TextField id={`childrenAge-${index}`} name={`age-${index}`} value={childrenPassengersState.passengers[index].age} onChange={(event) => { handleTableRowChange(event, setChildrenPassengersState, childrenPassengersState, index) }} label="Age" /></TableCell>
+                            <TableCell>
+                              <FormControl className={classes.formControl1}>
+                                <InputLabel id={`label-children-gender-${index}`}>Gender</InputLabel>
+                                <Select
+                                  labelId={`labelid-children-gender-${index}`}
+                                  id={`childrenGender-${index}`}
+                                  name={`gender-${index}`}
+                                  value={childrenPassengersState.passengers[index].gender} onChange={(event) => { handleTableRowChange(event, setChildrenPassengersState, childrenPassengersState, index) }}
+                                >
+                                  <MenuItem value={"male"}>Male</MenuItem>
+                                  <MenuItem value={"female"}>Female</MenuItem>
+                                </Select>
+
+                              </FormControl>
+                            </TableCell>
+
+                            <TableCell>
+                              <Button variant="contained" onClick={() => { deleteChildrenRow(index) }} color="primary">Delete Row</Button>
+                            </TableCell>
+
+                          </TableRow>
+                        ))}
+                      </TableBody>
+                    </Table>
+                  </TableContainer>
+
+                  <div className="row mt-3">
+                    <div className="col-12 col-sm-6">
+                      <Button variant="contained" color="primary" onClick={addChildrenRow}>Add Row</Button>
+                    </div>
+                    <div className="col-12 col-sm-6">
+                      <p>(Max. 3 Children)</p>
+                    </div>
+                  </div>
+
+
+                  <TextField
                     id="date"
                     label="Date of Travel"
                     type="date"
@@ -354,56 +515,56 @@ function Register(){
 
                   <h6>Upload Signature (For Audit Purpose)</h6>
                   <input
-                      accept="image/*"
-                      className={classes.input}
-                      id="contained-button-file"
-                      multiple
-                      type="file"
-                    />
-                    <label htmlFor="contained-button-file">
-                      <Button variant="contained" color="secondary" component="span" startIcon={<CloudUploadIcon />}>
-                        Upload Signature
-                      </Button>
-                    </label>
-                    <h6 className="text-center my-2">OR</h6>
-                    <h6 className="text-primary my-2">Digital Signature</h6>
-                    <div style={{border:"1px solid black"}}>
-                    <SignaturePad ref={sigPad} penColor="green"/>
-                    <div class="container-fluid" >
-                    <div class="row text-center m-1" >
-                      <div class="col-4" >
-                      <Button variant="contained" color="primary" onClick={clear} startIcon={<ClearIcon/>}>Clear</Button>
-                      </div>
-                      <div class="col-4">
-                      <Button variant="contained" color="primary" onClick={save} startIcon={<SaveIcon/>}>Save</Button>
-                      </div>
-                      <div class="col-4">
-                      <Button variant="contained" color="primary" onClick={show} startIcon={<VisibilityIcon/>}>Show</Button>
+                    accept="image/*"
+                    className={classes.input}
+                    id="contained-button-file"
+                    multiple
+                    type="file"
+                  />
+                  <label htmlFor="contained-button-file">
+                    <Button variant="contained" color="secondary" component="span" startIcon={<CloudUploadIcon />}>
+                      Upload Signature
+                    </Button>
+                  </label>
+                  <h6 className="text-center my-2">OR</h6>
+                  <h6 className="text-primary my-2">Digital Signature</h6>
+                  <div style={{ border: "1px solid black" }}>
+                    <SignaturePad ref={sigPad} penColor="green" />
+                    <div className="container-fluid" >
+                      <div className="row text-center m-1" >
+                        <div className="col-4" >
+                          <Button variant="contained" color="primary" onClick={clear} startIcon={<ClearIcon />}>Clear</Button>
+                        </div>
+                        <div className="col-4">
+                          <Button variant="contained" color="primary" onClick={save} startIcon={<SaveIcon />}>Save</Button>
+                        </div>
+                        <div className="col-4">
+                          <Button variant="contained" color="primary" onClick={show} startIcon={<VisibilityIcon />}>Show</Button>
+                        </div>
                       </div>
                     </div>
-                    </div>
-                    </div>
-               </div>
+                  </div>
+                </div>
 
-             </div>
-             
+              </div>
+
             </form>
-            
-            </CardContent>
-            <CardActions>
-            <Button variant="contained" color="primary" style={{margin:"auto"}}>
-                Request Tatkal Ticket 
+
+          </CardContent>
+          <CardActions>
+            <Button variant="contained" onClick={handleFormSubmission} color="primary" style={{ margin: "auto" }}>
+              Request Tatkal Ticket
             </Button>
-            </CardActions>
-          </Card>
-      
-    
-   
-   </div>
-    
-    
+          </CardActions>
+        </Card>
+
+
+
+      </div>
+
+
     </div>
 
-    )
+  )
 }
 export default Register;

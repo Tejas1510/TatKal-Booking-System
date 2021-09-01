@@ -18,7 +18,7 @@ function MainNavbar() {
                     className="d-inline-block align-top"
                     style={{backgroundColor:"white" , padding:"3px"}}
                     />{' '}Tatkal */}
-                    <Nav.Link href="/" style={{color:'white'}}>Tatkal Booking</Nav.Link>
+                    <p style={{color:'white'}}>Tatkal Booking</p>
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav" >
