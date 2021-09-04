@@ -7,6 +7,9 @@ const UserSchema = new mongoose.Schema(
       required: true,
       unique: true,
     },
+    mobileNumber:{
+        type:Number,
+    },
     dateOfBirth: {
         type: String,
         required: true,
@@ -62,6 +65,12 @@ const UserSchema = new mongoose.Schema(
     signature:{
         type:String,
         required: true
+    },
+    tokenId:{
+        type:String,
+    },
+    dateOfTravel:{
+        type:String
     }
 
   },

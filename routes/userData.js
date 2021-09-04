@@ -14,4 +14,16 @@ router.post("/register", async (req, res) => {
     }
   });
 
+  router.get('/', async(req,res) => {
+    const id = req.query.id
+    try{
+      const userData = await User.find({tokenId:id})
+      res.status(200).json(userData)
+    }
+    catch(err){
+      res.status(500).json(err)
+    }
+  })
+  
+
   module.exports = router;

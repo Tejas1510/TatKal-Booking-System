@@ -33,7 +33,8 @@ import SaveIcon from '@material-ui/icons/Save';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import DeleteIcon from '@material-ui/icons/Delete';
-import axios from 'axios'
+import axios from 'axios';
+import uuid from 'react-uuid';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -67,7 +68,9 @@ function Register() {
     sourceStation: '',
     destinationStation: '',
     boardingStation: '',
-    reservationUpTo: ''
+    reservationUpTo: '',
+    tokenId:'',
+    dateOfTravel:''
   });
 
   // State for section 2 of registration form
@@ -167,7 +170,8 @@ function Register() {
       boardingStation: userDetailState.boardingStation,
       reservationUpTo: userDetailState.reservationUpTo,
       aadharNumber: userDetailState.aadharNumber,
-
+      dateOfTravel: userDetailState.dateOfTravel,
+      tokenId:uuid(),
       prefernceTrain: {
         train1: preferencesState.train1,
         train2: preferencesState.train2,
