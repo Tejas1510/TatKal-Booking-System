@@ -12,6 +12,7 @@ import {
 import Guideliness from './pages/GuideLiness/Guideliness';
 import Contact from './pages/ContactUs/Contact';
 import OTPOperator from './pages/OTPOperator/OTPOperator';
+import CounterOperator from './pages/CounterOperator/CounterOperator';
 
 function App() {
   return (
@@ -32,6 +33,12 @@ function App() {
         </Route>
         <Route path ='/contactus'>
           <Contact/>
+        </Route>
+        <Route path ='/otp_op'>
+          <OTPOperator/>
+        </Route>
+        <Route path ='/counter_op'>
+          <CounterOperator/>
         </Route>
       </Switch>
     </Router>

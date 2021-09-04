@@ -31,6 +31,8 @@ import SignaturePad from 'react-signature-canvas';
 import ClearIcon from '@material-ui/icons/Clear';
 import SaveIcon from '@material-ui/icons/Save';
 import VisibilityIcon from '@material-ui/icons/Visibility';
+import AddCircleIcon from '@material-ui/icons/AddCircle';
+import DeleteIcon from '@material-ui/icons/Delete';
 import axios from 'axios'
 
 const useStyles = makeStyles((theme) => ({
@@ -425,7 +427,7 @@ function Register() {
                             </TableCell>
 
                             <TableCell>
-                              <Button variant="contained" onClick={() => { deletePassengerRow(index) }} color="primary">Delete Row</Button>
+                              <DeleteIcon variant="contained" color="secondary" fontSize="medium" onClick={() => { deletePassengerRow(index) }}/>
                             </TableCell>
 
                           </TableRow>
@@ -436,7 +438,7 @@ function Register() {
 
                   <div className="row mt-3">
                     <div className="col-12 col-sm-6">
-                      <Button variant="contained" color="primary" onClick={addPassengerRow}>Add Row</Button>
+                    <AddCircleIcon variant="contained" color="secondary" fontSize="large" onClick={addPassengerRow}/>
                     </div>
                     <div className="col-12 col-sm-6">
                       <p>(Max. 5 Passengers)</p>
@@ -483,7 +485,8 @@ function Register() {
                             </TableCell>
 
                             <TableCell>
-                              <Button variant="contained" onClick={() => { deleteChildrenRow(index) }} color="primary">Delete Row</Button>
+                     
+                              <DeleteIcon variant="contained" color="secondary" fontSize="medium" onClick={() => { deleteChildrenRow(index) }}/>
                             </TableCell>
 
                           </TableRow>
@@ -494,7 +497,7 @@ function Register() {
 
                   <div className="row mt-3">
                     <div className="col-12 col-sm-6">
-                      <Button variant="contained" color="primary" onClick={addChildrenRow}>Add Row</Button>
+                     <AddCircleIcon variant="contained" color="secondary" fontSize="large" onClick={addChildrenRow}/>
                     </div>
                     <div className="col-12 col-sm-6">
                       <p>(Max. 3 Children)</p>
