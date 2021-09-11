@@ -4,11 +4,11 @@ const UserSchema = new mongoose.Schema(
   {
     fullName: {
       type: String,
-      required: true,
-      unique: true,
+      required: true
     },
     mobileNumber:{
-        type:Number,
+        type: String,
+        required: true,
     },
     dateOfBirth: {
         type: String,
@@ -32,8 +32,7 @@ const UserSchema = new mongoose.Schema(
     },
     aadharNumber: {
         type: String,
-        required: true,
-        unique:true,
+        required: true
     },
     prefernceTrain:{
         train1: { type: String },
@@ -65,6 +64,10 @@ const UserSchema = new mongoose.Schema(
     signature:{
         type:String,
         required: true
+    },
+    otpVerification: {
+        type: Boolean,
+        required: true,
     },
     tokenId:{
         type:String,

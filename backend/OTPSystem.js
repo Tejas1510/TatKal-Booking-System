@@ -8,13 +8,10 @@ const authToken = "ef05b9dd938083b17433be4b831ce19b"
 const client = require('twilio')(accountSid,authToken)
 let refreshTokens = []
 
-const cors = require('cors');
 const JWT_AUTH_TOKEN = "4e749adfb13923ced102fdc0ba05252323d5393195513d03bb272fecf7afc3444c3e6f1aa4521dc8f6ee710ea6c360c2dc331303c42ae035548d8cdd58ff02a5"
 const JWT_REFRESH_TOKEN = "beda107d2488e51dbacff4108bf480f56d5ce479a3f2e8bd2bbf849b27010b5f0a96ae6f33493a5db2f9bbfff2ef08191fe9bc6c0c4962eec2af35d6da38a76e"
 const smsKey = "2d0bcaddbde6c19817c19a3ceab24b0c1a5e681817249dba27afd520f92d43e531163aba2011d366169fc9d29b214b63928bb52b22ba2f36607dbe84aa782a9e"
 
-app.use(express.json())
-app.use(cors({origin:'http://localhost:3000', credentials:true}))
 
 app.post('/sendOTP', (req,resp)=>{
     const phone = req.body.phone;
@@ -66,6 +63,8 @@ app.post('/verifyOTP', (req, res) => {
         }
 	}
 });
+
+
 
 app.listen(4000, function(req, resp){
     console.log("Running...")
