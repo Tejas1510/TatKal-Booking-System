@@ -33,7 +33,7 @@ import SaveIcon from '@material-ui/icons/Save';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import './OTPOperator.css';
 import SendIcon from '@material-ui/icons/Send';
-
+import axios from 'axios'
 import IconButton from "@material-ui/core/IconButton";
 import Snackbar from "@material-ui/core/Snackbar";
 import CloseIcon from "@material-ui/icons/Close";
@@ -42,26 +42,56 @@ import SearchIcon from '@material-ui/icons/Search';
 function OTPOperator() {
     const [userListState, setUserListState] = useState(
         [
-            { token_id: "12345", status: "verified", otpState: "sent", timer: 0 },
-            { token_id: "67890", status: "not verified", otpState: "not sent", timer: 0 },
-            { token_id: "52114", status: "not verified", otpState: "not sent", timer: 0 },
-            { token_id: "11890", status: "not verified", otpState: "not sent", timer: 0 },
-            { token_id: "71890", status: "not verified", otpState: "not sent", timer: 0 },
-            { token_id: "11113", status: "verified", otpState: "not sent", timer: 0 },
-            { token_id: "41257", status: "not verified", otpState: "not sent", timer: 0 },
-            { token_id: "62234", status: "verified", otpState: "sent", timer: 0 },
-            { token_id: "81247", status: "not verified", otpState: "not sent", timer: 0 }
+            { token_id: "67890", mobile_number:"9021067230", arr:[], status: "not verified", otpState: "not sent", timer:0}
         ]
     );
 
-    const sendOTP = (token_id) => {
+    const handlePhoneVerification=(phone1)=>{
+        axios.post("http://localhost:4000/sendOTP",{
+        phone: "+91" + phone1.toString()
+        }).then((res)=>{
+        const phone21 = res.data.phone
+        const hash21 = res.data.hash
+        const otp21 = res.data.otp
+        var OTParr = new Array()
+        OTParr = [phone21,hash21,otp21]
+        console.log(phone21,hash21,otp21);
+        return OTParr
+        })
+        } 
+
+        const handleSubmit = e =>{
+
+            console.log(userListState)  
+            axios.post("http://localhost:4000/verifyOTP",{
+            //   phone: userListState.arr[0],
+            //   hash :  userListState.arr[1],
+            //   otp: userListState.arr[2]
+            }).then(result => {
+              console.log(result.data.msg);
+            }).catch((err)=>{
+              console.log(err.response.data);
+              if(err.response.data.msg === "Incorrect OTP"){
+                window.alert("Incorrect OTP")
+              }
+
+            })
+              
+          }
+
+    const sendOTP = (token_id,mobile_number) => {
         console.log("OTP SEND");
         createSnackBar("OTP Sent Successfully");
+        console.log(mobile_number);
+        var arr1 = new Array()
+        console.log(handlePhoneVerification(mobile_number));
         let affectedIndex = userListState.findIndex(element => element.token_id === token_id );
         let newListState = [...userListState];
-        newListState[affectedIndex] = {...newListState[affectedIndex], otpState: "sent"};
+        newListState[affectedIndex] = {...newListState[affectedIndex], otpState: "sent", arr: arr1};
         setUserListState(newListState);
+        
     }
+
 
     const resendOTP = (token_id) => {
         console.log("OTP RESEND");
@@ -83,7 +113,7 @@ function OTPOperator() {
         if (record.otpState === "not sent") {
             return (
                 <div>
-                    <Button variant="contained" color="primary" onClick={() => {sendOTP(record.token_id)}} startIcon={<SendIcon />}>Send OTP</Button>
+                    <Button variant="contained" color="primary" onClick={() => {sendOTP(record.token_id, record.mobile_number)}} startIcon={<SendIcon />}>Send OTP</Button>
                 </div>
             );
         }
@@ -99,6 +129,9 @@ function OTPOperator() {
                             shrink: true,
                         }}
                     /><br />
+                    <Button variant="contained" color="primary" onClick={() => {handleSubmit()}} startIcon={<SendIcon />}>Confirm OTP</Button>
+                    <br />
+                    <br />
                     <Button variant="contained" color="primary" onClick={() => {resendOTP(record.token_id)}} startIcon={<SendIcon />}>Resend OTP</Button>
                 </div>
             );
