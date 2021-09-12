@@ -343,6 +343,11 @@ function Home() {
 
         </div>
 
+        {/* Footer Section */}
+        <div>
+          Footer
+        </div>
+
     </div>
 
     </div>
