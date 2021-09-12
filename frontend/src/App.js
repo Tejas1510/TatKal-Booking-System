@@ -16,17 +16,14 @@ import CounterOperator from './pages/CounterOperator/CounterOperator';
 
 function App() {
   return (
-    // <div>
-    //   <OTPOperator/>
-    // </div>
     <Router>
       <MainNavbar/>
       <Switch>
         <Route exact path ='/'>
-          <Register/>
-        </Route>
-        <Route  path ='/mainhomepage'>
           <Home/>
+        </Route>
+        <Route  path ='/register'>
+          <Register/>
         </Route>
         <Route  path ='/guideliness'>
           <Guideliness/>
