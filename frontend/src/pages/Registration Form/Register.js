@@ -165,6 +165,7 @@ function Register() {
     const completeForm = {
       fullName: userDetailState.fullName,
       dateOfBirth: userDetailState.dateOfBirth,
+      mobileNumber: userDetailState.mobileNumber,
       sourceStation: userDetailState.sourceStation,
       destinationStation: userDetailState.destinationStation,
       boardingStation: userDetailState.boardingStation,
@@ -187,7 +188,8 @@ function Register() {
 
       passengerDetail: adultPassengersState.passengers,
       childrenDetail: childrenPassengersState.passengers,
-      signature: "sss121"
+      signature: "sss121",
+      otpVerification: false
     };
     console.log(completeForm);
     const res = axios.post('http://localhost:5000/api/userdata/register', completeForm)
