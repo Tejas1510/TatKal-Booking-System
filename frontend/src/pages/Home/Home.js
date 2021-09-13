@@ -35,7 +35,7 @@ function Home() {
         url: "https://cdn.dribbble.com/users/121630/screenshots/13898887/media/7b0226c1cb9e4c394536fd3685054689.png?compress=1&resize=400x300"
       },
     }
-  }, 
+  },
   {
     title: "STEP 2",
     cardTitle: "Receive Token Number",
@@ -81,265 +81,265 @@ function Home() {
     }
   }];
 
- 
+
   return (
- <div>
-    <div style={{
-      backgroundImage: 'url("https://i.ytimg.com/vi/tBZRI-u1Q94/maxresdefault.jpg")',
-       height:"600px" ,backgroundRepeat: "no-repeat", backgroundSize: "cover"
-    }} class="container-fluid col-sm-12 col-12 responsive">
+    <div>
+      <div style={{
+        backgroundImage: 'url("https://i.ytimg.com/vi/tBZRI-u1Q94/maxresdefault.jpg")',
+        height: "600px", backgroundRepeat: "no-repeat", backgroundSize: "cover"
+      }} class="container-fluid col-sm-12 col-12 responsive">
 
-    <div class="col-6">
-           <h1 class="ml-4 p-5 text-dark" style={{fontSize:"10vh"}}>Indian Railways Tatkal Reservation</h1>
-    </div>
-    </div>
-
-    <div class="container my-3">
-     
-    <h1 class="text-center text-primary" >About </h1>
-    <h5 class="text-center p-2">This initiative by Indian Railways Nagpur Region is taken to remove the hectic and time-consuming process of Offline Tatkal Reservation System. This system would be a boon to present system, to know Why, read below section.</h5>
-    <div class="row">
-      <div class="col-12 col-sm-6 bg-light shadow p-4">
-      <div class="row">
-        <div class="col-12 col-sm-6">
-        <h2 class="text-primary">No more waiting in Long Queues</h2>
-        People used to wait in Lonq queues for their turn and a lot of them would need to return without any tickets. Now, to curb this we have a Token Giving System wherin only those users having the token could come at Railway Ticket Counter.
+        <div class="col-md-7 col-12" style={{backgroundColor: "rgba(255, 255, 255, 0.6)"}}>
+          <h1 class="ml-4 p-5 text-dark display-1">Indian Railways Tatkal Reservation</h1>
         </div>
-        <div class="col-12 col-sm-6">
-        <img src="https://resize.indiatvnews.com/en/resize/newbucket/715_-/2018/10/queue-1540400008.jpg" width="100%"></img>
-          </div>
       </div>
-        
 
-      </div>
-      <div class="col-12 col-sm-6 bg-light shadow p-4">
-      <div class="row">
-        <div class="col-12 col-sm-6">
-        <h2 class="text-primary">No More Tedious Task of Form Filling</h2>
-        People don't tend to fill lengthy forms at railway station among so much crowd and had to haste for receiving tatkal ticket. Now using this platform people could fill their forms at their own comfort and could take their own time.
+      <div class="container my-3">
+
+        <h1 class="text-center text-primary" >About </h1>
+        <h5 class="text-center p-2">This initiative by Indian Railways Nagpur Region is taken to remove the hectic and time-consuming process of Offline Tatkal Reservation System. This system would be a boon to present system, to know Why, read below section.</h5>
+        <div class="row">
+          <div class="col-12 col-sm-6 bg-light shadow p-4">
+            <div class="row">
+              <div class="col-12 col-sm-6">
+                <h2 class="text-primary">No more waiting in Long Queues</h2>
+                People used to wait in Lonq queues for their turn and a lot of them would need to return without any tickets. Now, to curb this we have a Token Giving System wherin only those users having the token could come at Railway Ticket Counter.
+              </div>
+              <div class="col-12 col-sm-6">
+                <img src="https://resize.indiatvnews.com/en/resize/newbucket/715_-/2018/10/queue-1540400008.jpg" width="100%"></img>
+              </div>
+            </div>
+
+
+          </div>
+          <div class="col-12 col-sm-6 bg-light shadow p-4">
+            <div class="row">
+              <div class="col-12 col-sm-6">
+                <h2 class="text-primary">No More Tedious Task of Form Filling</h2>
+                People don't tend to fill lengthy forms at railway station among so much crowd and had to haste for receiving tatkal ticket. Now using this platform people could fill their forms at their own comfort and could take their own time.
+              </div>
+              <div class="col-12 col-sm-6">
+                <img src="https://www.irctcstationcode.com/wp-content/uploads/2014/12/Man-Validating-the-Forms.jpg" width="100%"></img>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="col-12 col-sm-6">
-        <img src="https://www.irctcstationcode.com/wp-content/uploads/2014/12/Man-Validating-the-Forms.jpg" width="100%"></img>
-          </div>
-      </div>
-      </div>
-    </div>
 
-    <div class="row my-4">
-      <div class="col-12 col-sm-6 bg-light shadow p-3">
-      <div class="row">
-        <div class="col-12 col-sm-6">
-        <h2 class="text-primary">Probablity of Getting tickets would be High!!</h2>
-        People used to wait in Long queues from 4 AM in the morning and had to return as very few people could get Tatkal Tickets. <br/>
-        But, now only few people would be able to come at Railway Counter for booking tickets and hence  your probablity of getting tickets would be More!!
+        <div class="row my-4">
+          <div class="col-12 col-sm-6 bg-light shadow p-3">
+            <div class="row">
+              <div class="col-12 col-sm-6">
+                <h2 class="text-primary">Probablity of Getting tickets would be High!!</h2>
+                People used to wait in Long queues from 4 AM in the morning and had to return as very few people could get Tatkal Tickets. <br />
+                But, now only few people would be able to come at Railway Counter for booking tickets and hence  your probablity of getting tickets would be More!!
+              </div>
+              <div class="col-12 col-sm-6">
+                <img src="https://blog.railyatri.in/wp-content/uploads/2019/06/Trouble-Free-Booking.png" width="100%"></img>
+              </div>
+            </div>
+
+
+          </div>
+          <div class="col-12 col-sm-6 bg-light shadow p-3">
+            <div class="row">
+              <div class="col-12 col-sm-6">
+                <h2 class="text-primary">Lot of Paperwork Reduced</h2>
+                As responsibe citizens, our responsibity is to save Paper and going with these morals we are going with initiative of E-forms which would drastically reduce tonns of paper. Also paperwork for audit purpose would be eliminated as digital signatures would be taken from passengers.
+              </div>
+              <div class="col-12 col-sm-6">
+                <img src="https://media.istockphoto.com/vectors/green-ecology-concept-paper-cut-style-vector-id1178245155?k=20&m=1178245155&s=612x612&w=0&h=6GkTK2kaF3WxdZXFoaTkzrJxh3fTGNsnKghx9vCfSjI=" width="100%"></img>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="col-12 col-sm-6">
-        <img src="https://blog.railyatri.in/wp-content/uploads/2019/06/Trouble-Free-Booking.png" width="100%"></img>
-          </div>
-      </div>
-        
+        <hr />
+        <div class="col-12 col-sm-8 my-3" style={{ margin: "auto" }}>
 
-      </div>
-      <div class="col-12 col-sm-6 bg-light shadow p-3">
-      <div class="row">
-        <div class="col-12 col-sm-6">
-        <h2 class="text-primary">Lot of Paperwork Reduced</h2>
-        As responsibe citizens, our responsibity is to save Paper and going with these morals we are going with initiative of E-forms which would drastically reduce tonns of paper. Also paperwork for audit purpose would be eliminated as digital signatures would be taken from passengers.
-        </div>
-        <div class="col-12 col-sm-6">
-        <img src="https://media.istockphoto.com/vectors/green-ecology-concept-paper-cut-style-vector-id1178245155?k=20&m=1178245155&s=612x612&w=0&h=6GkTK2kaF3WxdZXFoaTkzrJxh3fTGNsnKghx9vCfSjI=" width="100%"></img>
-          </div>
-      </div>
-      </div>
-    </div>
-    <hr/> 
-    <div class="col-12 col-sm-8 my-3" style={{ margin: "auto" }}>
-
-        <h1 class="text-center text-primary" > How to Proceed?</h1>
-        < Chrono
-          items={items}
-          mode="VERTICAL_ALTERNATING"
-          theme={{ 
+          <h1 class="text-center text-primary" > How to Proceed?</h1>
+          < Chrono
+            items={items}
+            mode="VERTICAL_ALTERNATING"
+            theme={{
               primary: "red",
               secondary: "yellow",
               cardBgColor: "white",
               cardForeColor: "black",
               titleColor: "blue"
-          }} 
+            }}
             cardWidth="300"
             cardHeight="200"
-              />
+          />
 
-    </div>
-  
-  <div class="container col-9">
-    <h1 class="text-center text-primary my-2" >Recent Updates</h1>
-    <Carousel 
-     NextIcon={<NavigateNextIcon/>}
-        PrevIcon={<ArrowBackIosIcon/>}
-        >
-       <div class="row my-3">
+        </div>
+
+        <div class="container col-9">
+          <h1 class="text-center text-primary my-2" >Recent Updates</h1>
+          <Carousel
+            NextIcon={<NavigateNextIcon />}
+            PrevIcon={<ArrowBackIosIcon />}
+          >
+            <div class="row my-3">
               <div class="col-12 col-sm-4">
-              <Card className={classes.root}>
-                <CardActionArea>
-                  <CardMedia className={classes.media}
-                    image="https://images.hindustantimes.com/img/2021/09/09/550x309/044cbafe-1174-11ec-8f84-d3748427d977_1631205954037.jpg"
-                    title="Train"
-                  />
-                  <CardContent>
-                    <Typography gutterBottom variant="h5" component="h2">
-                    New high-speed train corridors planned to connect Mumbai with Pune, Nagpur
-                    </Typography>
-                    <Typography variant="body2" color="textSecondary" component="p">
-                    A semi high-speed train corridor between Mumbai and Pune being planned to reduce travel time to ...
-                    </Typography>
-                  </CardContent>
-                </CardActionArea>
-                <CardActions>
-                  <Button size="small" color="primary">
-                   <a href="https://www.hindustantimes.com/cities/mumbai-news"> Read More</a>
-                  </Button>
-                
-                </CardActions>
-              </Card>
+                <Card className={classes.root}>
+                  <CardActionArea>
+                    <CardMedia className={classes.media}
+                      image="https://images.hindustantimes.com/img/2021/09/09/550x309/044cbafe-1174-11ec-8f84-d3748427d977_1631205954037.jpg"
+                      title="Train"
+                    />
+                    <CardContent>
+                      <Typography gutterBottom variant="h5" component="h2">
+                        New high-speed train corridors planned to connect Mumbai with Pune, Nagpur
+                      </Typography>
+                      <Typography variant="body2" color="textSecondary" component="p">
+                        A semi high-speed train corridor between Mumbai and Pune being planned to reduce travel time to ...
+                      </Typography>
+                    </CardContent>
+                  </CardActionArea>
+                  <CardActions>
+                    <Button size="small" color="primary">
+                      <a href="https://www.hindustantimes.com/cities/mumbai-news"> Read More</a>
+                    </Button>
+
+                  </CardActions>
+                </Card>
 
               </div>
               <div class="col-12 col-sm-4">
-              <Card className={classes.root}>
-                <CardActionArea>
-                  <CardMedia className={classes.media}
-                    image="https://static.toiimg.com/thumb/msid-85817568,imgsize-96760,width-400,resizemode-4/85817568.jpg"
-                    title="Train"
-                  />
-                  <CardContent>
-                    <Typography gutterBottom variant="h5" component="h2">
-                    Railways shifting to solar power could cut emissions
-                    </Typography>
-                    <Typography variant="body2" color="textSecondary" component="p">
-                    Nagpur: Direct supply of solar energy to Indian Railway lines, without the need to connect through the grid, would save...
-                    </Typography>
-                  </CardContent>
-                </CardActionArea>
-                <CardActions>
-                  <Button size="small" color="primary">
-                  <a href="https://timesofindia.indiatimes.com/city/nagpur/railways-shifting-to-solar-power-could-cut-emissions-study/articleshow/85817569.cms"> Read More</a>
-                  </Button>
-                
-                </CardActions>
-              </Card>
+                <Card className={classes.root}>
+                  <CardActionArea>
+                    <CardMedia className={classes.media}
+                      image="https://static.toiimg.com/thumb/msid-85817568,imgsize-96760,width-400,resizemode-4/85817568.jpg"
+                      title="Train"
+                    />
+                    <CardContent>
+                      <Typography gutterBottom variant="h5" component="h2">
+                        Railways shifting to solar power could cut emissions
+                      </Typography>
+                      <Typography variant="body2" color="textSecondary" component="p">
+                        Nagpur: Direct supply of solar energy to Indian Railway lines, without the need to connect through the grid, would save...
+                      </Typography>
+                    </CardContent>
+                  </CardActionArea>
+                  <CardActions>
+                    <Button size="small" color="primary">
+                      <a href="https://timesofindia.indiatimes.com/city/nagpur/railways-shifting-to-solar-power-could-cut-emissions-study/articleshow/85817569.cms"> Read More</a>
+                    </Button>
+
+                  </CardActions>
+                </Card>
 
               </div>
               <div class="col-12 col-sm-4">
-              <Card className={classes.root}>
-                <CardActionArea>
-                  <CardMedia className={classes.media}
-                    image="https://static.india.com/wp-content/uploads/2021/05/special-trains-list.jpg"
-                    title="Train"
-                  />
-                  <CardContent>
-                    <Typography gutterBottom variant="h5" component="h2">
-                    Indian Railways All Set to Run Special Festival Trains From Sept 13 
-                    </Typography>
-                    <Typography variant="body2" color="textSecondary" component="p">
-                    As per the latest announcement, the Indian Railways will operate Durg-Ajmer-Durg and Durg-Jammu Tawi weekly superfast special trains to cater to the demand...
-                    </Typography>
-                  </CardContent>
-                </CardActionArea>
-                <CardActions>
-                  <Button size="small" color="primary">
-                  <a href="https://www.india.com/business/irctc-latest-news-today-11-september-2021-indian-railways-all-set-to-run-special-festival-trains-from-sept-13-durg-ajmer-durg-and-durg-jammu-tawi-superfast-special-trains-4950444/"> Read More</a>
-                  </Button>
-                
-                </CardActions>
-              </Card>
+                <Card className={classes.root}>
+                  <CardActionArea>
+                    <CardMedia className={classes.media}
+                      image="https://static.india.com/wp-content/uploads/2021/05/special-trains-list.jpg"
+                      title="Train"
+                    />
+                    <CardContent>
+                      <Typography gutterBottom variant="h5" component="h2">
+                        Indian Railways All Set to Run Special Festival Trains From Sept 13
+                      </Typography>
+                      <Typography variant="body2" color="textSecondary" component="p">
+                        As per the latest announcement, the Indian Railways will operate Durg-Ajmer-Durg and Durg-Jammu Tawi weekly superfast special trains to cater to the demand...
+                      </Typography>
+                    </CardContent>
+                  </CardActionArea>
+                  <CardActions>
+                    <Button size="small" color="primary">
+                      <a href="https://www.india.com/business/irctc-latest-news-today-11-september-2021-indian-railways-all-set-to-run-special-festival-trains-from-sept-13-durg-ajmer-durg-and-durg-jammu-tawi-superfast-special-trains-4950444/"> Read More</a>
+                    </Button>
 
-    </div>
-    
+                  </CardActions>
+                </Card>
 
-   </div>
-   <div class="row my-3">
-   <div class="col-12 col-sm-4">
-              <Card className={classes.root}>
-                <CardActionArea>
-                  <CardMedia className={classes.media}
-                    image="https://images.hindustantimes.com/img/2021/09/09/550x309/044cbafe-1174-11ec-8f84-d3748427d977_1631205954037.jpg"
-                    title="Train"
-                  />
-                  <CardContent>
-                    <Typography gutterBottom variant="h5" component="h2">
-                    New high-speed train corridors planned to connect Mumbai with Pune, Nagpur
-                    </Typography>
-                    <Typography variant="body2" color="textSecondary" component="p">
-                    A semi high-speed train corridor between Mumbai and Pune being planned to reduce travel time to ...
-                    </Typography>
-                  </CardContent>
-                </CardActionArea>
-                <CardActions>
-                  <Button size="small" color="primary">
-                   <a href="https://www.hindustantimes.com/cities/mumbai-news"> Read More</a>
-                  </Button>
-                
-                </CardActions>
-              </Card>
+              </div>
+
+
+            </div>
+            <div class="row my-3">
+              <div class="col-12 col-sm-4">
+                <Card className={classes.root}>
+                  <CardActionArea>
+                    <CardMedia className={classes.media}
+                      image="https://images.hindustantimes.com/img/2021/09/09/550x309/044cbafe-1174-11ec-8f84-d3748427d977_1631205954037.jpg"
+                      title="Train"
+                    />
+                    <CardContent>
+                      <Typography gutterBottom variant="h5" component="h2">
+                        New high-speed train corridors planned to connect Mumbai with Pune, Nagpur
+                      </Typography>
+                      <Typography variant="body2" color="textSecondary" component="p">
+                        A semi high-speed train corridor between Mumbai and Pune being planned to reduce travel time to ...
+                      </Typography>
+                    </CardContent>
+                  </CardActionArea>
+                  <CardActions>
+                    <Button size="small" color="primary">
+                      <a href="https://www.hindustantimes.com/cities/mumbai-news"> Read More</a>
+                    </Button>
+
+                  </CardActions>
+                </Card>
 
               </div>
               <div class="col-12 col-sm-4">
-              <Card className={classes.root}>
-                <CardActionArea>
-                  <CardMedia className={classes.media}
-                    image="https://static.toiimg.com/thumb/msid-85817568,imgsize-96760,width-400,resizemode-4/85817568.jpg"
-                    title="Train"
-                  />
-                  <CardContent>
-                    <Typography gutterBottom variant="h5" component="h2">
-                    Railways shifting to solar power could cut emissions
-                    </Typography>
-                    <Typography variant="body2" color="textSecondary" component="p">
-                    Nagpur: Direct supply of solar energy to Indian Railway lines, without the need to connect through the grid, would save...
-                    </Typography>
-                  </CardContent>
-                </CardActionArea>
-                <CardActions>
-                  <Button size="small" color="primary">
-                  <a href="https://timesofindia.indiatimes.com/city/nagpur/railways-shifting-to-solar-power-could-cut-emissions-study/articleshow/85817569.cms"> Read More</a>
-                  </Button>
-                
-                </CardActions>
-              </Card>
+                <Card className={classes.root}>
+                  <CardActionArea>
+                    <CardMedia className={classes.media}
+                      image="https://static.toiimg.com/thumb/msid-85817568,imgsize-96760,width-400,resizemode-4/85817568.jpg"
+                      title="Train"
+                    />
+                    <CardContent>
+                      <Typography gutterBottom variant="h5" component="h2">
+                        Railways shifting to solar power could cut emissions
+                      </Typography>
+                      <Typography variant="body2" color="textSecondary" component="p">
+                        Nagpur: Direct supply of solar energy to Indian Railway lines, without the need to connect through the grid, would save...
+                      </Typography>
+                    </CardContent>
+                  </CardActionArea>
+                  <CardActions>
+                    <Button size="small" color="primary">
+                      <a href="https://timesofindia.indiatimes.com/city/nagpur/railways-shifting-to-solar-power-could-cut-emissions-study/articleshow/85817569.cms"> Read More</a>
+                    </Button>
+
+                  </CardActions>
+                </Card>
 
               </div>
               <div class="col-12 col-sm-4">
-              <Card className={classes.root}>
-                <CardActionArea>
-                  <CardMedia className={classes.media}
-                    image="https://static.india.com/wp-content/uploads/2021/05/special-trains-list.jpg"
-                    title="Train"
-                  />
-                  <CardContent>
-                    <Typography gutterBottom variant="h5" component="h2">
-                    Indian Railways All Set to Run Special Festival Trains From Sept 13 
-                    </Typography>
-                    <Typography variant="body2" color="textSecondary" component="p">
-                    As per the latest announcement, the Indian Railways will operate Durg-Ajmer-Durg and Durg-Jammu Tawi weekly superfast special trains to cater to the demand...
-                    </Typography>
-                  </CardContent>
-                </CardActionArea>
-                <CardActions>
-                  <Button size="small" color="primary">
-                  <a href="https://www.india.com/business/irctc-latest-news-today-11-september-2021-indian-railways-all-set-to-run-special-festival-trains-from-sept-13-durg-ajmer-durg-and-durg-jammu-tawi-superfast-special-trains-4950444/"> Read More</a>
-                  </Button>
-                
-                </CardActions>
-              </Card>
+                <Card className={classes.root}>
+                  <CardActionArea>
+                    <CardMedia className={classes.media}
+                      image="https://static.india.com/wp-content/uploads/2021/05/special-trains-list.jpg"
+                      title="Train"
+                    />
+                    <CardContent>
+                      <Typography gutterBottom variant="h5" component="h2">
+                        Indian Railways All Set to Run Special Festival Trains From Sept 13
+                      </Typography>
+                      <Typography variant="body2" color="textSecondary" component="p">
+                        As per the latest announcement, the Indian Railways will operate Durg-Ajmer-Durg and Durg-Jammu Tawi weekly superfast special trains to cater to the demand...
+                      </Typography>
+                    </CardContent>
+                  </CardActionArea>
+                  <CardActions>
+                    <Button size="small" color="primary">
+                      <a href="https://www.india.com/business/irctc-latest-news-today-11-september-2021-indian-railways-all-set-to-run-special-festival-trains-from-sept-13-durg-ajmer-durg-and-durg-jammu-tawi-superfast-special-trains-4950444/"> Read More</a>
+                    </Button>
 
-    </div>
-    
-    
+                  </CardActions>
+                </Card>
 
-   </div>
+              </div>
 
-       
-        </Carousel>
+
+
+            </div>
+
+
+          </Carousel>
 
         </div>
 
@@ -348,7 +348,7 @@ function Home() {
           Footer
         </div>
 
-    </div>
+      </div>
 
     </div>
   )

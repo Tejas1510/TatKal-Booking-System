@@ -34,13 +34,13 @@ const UserSchema = new mongoose.Schema(
         type: String,
         required: true
     },
-    prefernceTrain:{
+    preferenceTrain:{
         train1: { type: String },
         train2: { type: String },
         train3: { type: String },
         allTrain: { type: Boolean }
     },
-    prefernceClass:{
+    preferenceClass:{
         class1: { type: String },
         class2: { type: String },
         class3: { type: String },

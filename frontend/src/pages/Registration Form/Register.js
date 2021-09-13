@@ -35,6 +35,8 @@ import AddCircleIcon from '@material-ui/icons/AddCircle';
 import DeleteIcon from '@material-ui/icons/Delete';
 import axios from 'axios';
 import uuid from 'react-uuid';
+import validateRegistrationForm from './Validations';
+import Notifier from './Notifier';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -69,8 +71,8 @@ function Register() {
     destinationStation: '',
     boardingStation: '',
     reservationUpTo: '',
-    tokenId:'',
-    dateOfTravel:''
+    tokenId: '',
+    dateOfTravel: ''
   });
 
   // State for section 2 of registration form
@@ -99,6 +101,10 @@ function Register() {
     maxRowCount: 3,
     passengers: [{ name: '', age: '', gender: '', berth: '' }]
   });
+
+  // HOLDS ALL THE ERRORS IN REGISTRATION FORM
+  const [errorMessagesState, setErrorMessagesState] = React.useState([]);
+
 
   const addChildrenRow = () => {
     if (childrenPassengersState.rowCount < childrenPassengersState.maxRowCount) {
@@ -172,14 +178,14 @@ function Register() {
       reservationUpTo: userDetailState.reservationUpTo,
       aadharNumber: userDetailState.aadharNumber,
       dateOfTravel: userDetailState.dateOfTravel,
-      tokenId:uuid(),
-      prefernceTrain: {
+      tokenId: uuid(),
+      preferenceTrain: {
         train1: preferencesState.train1,
         train2: preferencesState.train2,
         train3: preferencesState.train3,
         allTrain: preferencesState.allTrain
       },
-      prefernceClass: {
+      preferenceClass: {
         class1: preferencesState.class1,
         class2: preferencesState.class2,
         class3: preferencesState.class3,
@@ -192,10 +198,22 @@ function Register() {
       otpVerification: false
     };
     console.log(completeForm);
-    const res = axios.post('http://localhost:5000/api/userdata/register', completeForm)
-      .then((response) => {
-        console.log("response", response);
-      });
+    var errorMessages = validateRegistrationForm(completeForm);
+    setErrorMessagesState(errorMessages);
+
+    if (errorMessages.length === 0) {
+      console.log("FORM SUBMITTED SUCCESSFULLY");
+      const res = axios.post('http://localhost:5000/api/userdata/register', completeForm)
+        .then((response) => {
+          console.log("response", response);
+        });
+    }
+    else {
+      // ERROR LOGGED
+      console.log(errorMessages);
+      window.scrollTo(0,document.body.scrollHeight);
+    }
+
   }
 
 
@@ -433,7 +451,7 @@ function Register() {
                             </TableCell>
 
                             <TableCell>
-                              <DeleteIcon variant="contained" color="secondary" fontSize="medium" onClick={() => { deletePassengerRow(index) }}/>
+                              <DeleteIcon variant="contained" color="secondary" fontSize="medium" onClick={() => { deletePassengerRow(index) }} />
                             </TableCell>
 
                           </TableRow>
@@ -444,7 +462,7 @@ function Register() {
 
                   <div className="row mt-3">
                     <div className="col-12 col-sm-6">
-                    <AddCircleIcon variant="contained" color="secondary" fontSize="large" onClick={addPassengerRow}/>
+                      <AddCircleIcon variant="contained" color="secondary" fontSize="large" onClick={addPassengerRow} />
                     </div>
                     <div className="col-12 col-sm-6">
                       <p>(Max. 5 Passengers)</p>
@@ -491,8 +509,8 @@ function Register() {
                             </TableCell>
 
                             <TableCell>
-                     
-                              <DeleteIcon variant="contained" color="secondary" fontSize="medium" onClick={() => { deleteChildrenRow(index) }}/>
+
+                              <DeleteIcon variant="contained" color="secondary" fontSize="medium" onClick={() => { deleteChildrenRow(index) }} />
                             </TableCell>
 
                           </TableRow>
@@ -503,19 +521,20 @@ function Register() {
 
                   <div className="row mt-3">
                     <div className="col-12 col-sm-6">
-                     <AddCircleIcon variant="contained" color="secondary" fontSize="large" onClick={addChildrenRow}/>
+                      <AddCircleIcon variant="contained" color="secondary" fontSize="large" onClick={addChildrenRow} />
                     </div>
                     <div className="col-12 col-sm-6">
                       <p>(Max. 3 Children)</p>
                     </div>
                   </div>
 
-
                   <TextField
-                    id="date"
+                    id="dateOfTrabel"
                     label="Date of Travel"
                     type="date"
-                    defaultValue="2017-05-24"
+                    name="dateOfTravel"
+                    onBlur={(event) => { handleTextFieldChange(event, setUserDetailState, userDetailState) }}
+                    defaultValue={userDetailState.dateOfTravel}
                     className="my-4"
                     InputLabelProps={{
                       shrink: true,
@@ -565,13 +584,10 @@ function Register() {
               Request Tatkal Ticket
             </Button>
           </CardActions>
-        </Card>
 
-
-
-      </div>
-
-
+          <Notifier errorMessages={errorMessagesState} />
+        </Card>        
+      </div>      
     </div>
 
   )
