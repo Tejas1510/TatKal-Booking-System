@@ -6,6 +6,7 @@ const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 const userDataRoute = require("./routes/userData");
 const OTPOperatorRoute = require("./routes/OTPOperatorRoute");
+const randomTokenRoute = require("./routes/RandomToken");
 const multer = require("multer");
 const path = require("path");
 
@@ -40,6 +41,7 @@ app.post("/api/upload", upload.single("file"), (req, res) => {
 
 app.use("/api/userdata", userDataRoute);
 app.use("/api/otpOperator", OTPOperatorRoute);
+app.use("/api/randomToken", randomTokenRoute);
 
 app.listen("5000", () => {
   console.log("Backend is running.");

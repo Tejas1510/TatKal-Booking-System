@@ -74,6 +74,10 @@ const UserSchema = new mongoose.Schema(
     },
     dateOfTravel:{
         type:String
+    },
+    selectedUser:{
+        type:Boolean,
+        require:true
     }
 
   },
