@@ -37,6 +37,8 @@ import axios from 'axios';
 import uuid from 'react-uuid';
 import validateRegistrationForm from './Validations';
 import Notifier from './Notifier';
+import Success from './Success';
+import Spinner from 'react-bootstrap/Spinner';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -60,6 +62,12 @@ const useStyles = makeStyles((theme) => ({
 function Register() {
 
   const classes = useStyles();
+
+  // If form is successfully submitted, this state is set to true
+  const [formSubmitState, setFormSubmitState] = React.useState(false);
+
+  // if form is doing API request, this state is set to true
+  const [loadingState, setLoadingState] = React.useState(false);
 
   // State for section 1 of registration form
   const [userDetailState, setUserDetailState] = React.useState({
@@ -168,6 +176,7 @@ function Register() {
 
   const handleFormSubmission = (event) => {
     console.log("Form Submitted");
+    setLoadingState(true);
     const completeForm = {
       fullName: userDetailState.fullName,
       dateOfBirth: userDetailState.dateOfBirth,
@@ -206,12 +215,19 @@ function Register() {
       const res = axios.post('http://localhost:5000/api/userdata/register', completeForm)
         .then((response) => {
           console.log("response", response);
+          setLoadingState(false);
+          setFormSubmitState(true);
+        }).catch((err) => {
+          setLoadingState(false);
+          errorMessages = ["Could Not Submit The Form", "Check Your network connection or try again."]
+          setErrorMessagesState(errorMessages);
         });
     }
     else {
       // ERROR LOGGED
       console.log(errorMessages);
       window.scrollTo(0,document.body.scrollHeight);
+      setLoadingState(false);
     }
 
   }
@@ -228,6 +244,10 @@ function Register() {
   }
   function show() {
     sigPad.current.fromDataURL(data);
+  }
+
+  if (formSubmitState === true) {
+    return <Success />
   }
 
   return (
@@ -579,15 +599,23 @@ function Register() {
             </form>
 
           </CardContent>
+
           <CardActions>
-            <Button variant="contained" onClick={handleFormSubmission} color="primary" style={{ margin: "auto" }}>
+            <div className={loadingState ? "d-block" : "d-none"} style={{ textAlign: "center", width: "100%" }}>
+              <Spinner animation="border" variant="primary" /> <br />
+            </div>
+          </CardActions>
+
+          <CardActions>
+            <Button disabled={loadingState} variant="contained" onClick={handleFormSubmission} color="primary" style={{ margin: "auto" }}>
               Request Tatkal Ticket
             </Button>
           </CardActions>
 
+
           <Notifier errorMessages={errorMessagesState} />
-        </Card>        
-      </div>      
+        </Card>
+      </div>
     </div>
 
   )

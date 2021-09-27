@@ -13,6 +13,7 @@ import Guideliness from './pages/GuideLiness/Guideliness';
 import Contact from './pages/ContactUs/Contact';
 import OTPOperator from './pages/OTPOperator/OTPOperator';
 import CounterOperator from './pages/CounterOperator/CounterOperator';
+import Success from './pages/Registration Form/Success';
 
 function App() {
   return (
