@@ -14,6 +14,7 @@ import Contact from './pages/ContactUs/Contact';
 import OTPOperator from './pages/OTPOperator/OTPOperator';
 import CounterOperator from './pages/CounterOperator/CounterOperator';
 import Success from './pages/Registration Form/Success';
+import OperatorLogin from './pages/RailwayOperatorsAuthentication/OperatorLogin';
 
 function App() {
   return (
@@ -37,6 +38,9 @@ function App() {
         </Route>
         <Route path ='/counter_op'>
           <CounterOperator/>
+        </Route>
+        <Route path='/loginRailway'>
+          <OperatorLogin/>
         </Route>
       </Switch>
     </Router>

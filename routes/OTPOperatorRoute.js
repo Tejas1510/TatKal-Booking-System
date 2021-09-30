@@ -11,7 +11,7 @@ const JWT_AUTH_TOKEN = "4e749adfb13923ced102fdc0ba05252323d5393195513d03bb272fec
 const JWT_REFRESH_TOKEN = "beda107d2488e51dbacff4108bf480f56d5ce479a3f2e8bd2bbf849b27010b5f0a96ae6f33493a5db2f9bbfff2ef08191fe9bc6c0c4962eec2af35d6da38a76e"
 const smsKey = "2d0bcaddbde6c19817c19a3ceab24b0c1a5e681817249dba27afd520f92d43e531163aba2011d366169fc9d29b214b63928bb52b22ba2f36607dbe84aa782a9e"
 
-
+const {tokenVerifier} = require('./TokenUtils');
 // router.post("/register", async (req, res) => {
 //     try {
 //       const newUser = new User(req.body);
@@ -90,10 +90,15 @@ router.post('/verifyOTP', (req, res) => {
 // To get all user data
 router.get('/otpUserData', async (req, res) => {
     try {
+        const token = await tokenVerifier(req.headers.token);
         const userData = await User.find({})
-        res.status(200).json(userData)
+        if(token)
+            res.status(200).json({'status': 'verified', 'email':token.email, 'userData':userData});
+        else
+            res.status(200).json({'status': 'invalid token'});
     }
     catch (err) {
+        console.log(err);
         res.status(500).json(err)
     }
 })

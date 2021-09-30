@@ -10,27 +10,6 @@ import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import TextField from '@material-ui/core/TextField';
-import { makeStyles } from '@material-ui/core/styles';
-import Divider from '@material-ui/core/Divider';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
-import InputLabel from '@material-ui/core/InputLabel';
-import Checkbox from '@material-ui/core/Checkbox';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
-import CloudUploadIcon from '@material-ui/icons/CloudUpload';
-import SignaturePad from 'react-signature-canvas';
-import ClearIcon from '@material-ui/icons/Clear';
-import SaveIcon from '@material-ui/icons/Save';
-import VisibilityIcon from '@material-ui/icons/Visibility';
 import './OTPOperator.css';
 import SendIcon from '@material-ui/icons/Send';
 import axios from 'axios'
@@ -38,24 +17,54 @@ import IconButton from "@material-ui/core/IconButton";
 import Snackbar from "@material-ui/core/Snackbar";
 import CloseIcon from "@material-ui/icons/Close";
 import SearchIcon from '@material-ui/icons/Search';
+import { Redirect } from 'react-router-dom';
+import Spinner from 'react-bootstrap/Spinner';
+import RailwayOperatorActionBar from '../../components/RailwayOperatorActionBar/RailwayOperatorActionBar';
 
 function OTPOperator() {
 
-    const [userListState, setUserListState] = useState( [] );
+    const [userListState, setUserListState] = useState([]);
+    const [loggedInState, setLoggedInState] = useState({ status: 'checking', email: '' });
 
     const fetchUserData = () => {
-        axios.get("http://localhost:5000/api/otpOperator/otpUserData")
-        .then(result => {
-            var newStateList = [];
-            for(let obj of result.data){
-                //console.log(obj);
-                newStateList.push({ fullName: obj.fullName, tokenId: obj.tokenId, mobile_number: obj.mobileNumber, arr: [], otpVerification: obj.otpVerification, otpState: "not sent", otpValue: "", timer: 0 });
+        const token = localStorage.getItem("token") || '';
+        axios.get("http://localhost:5000/api/otpOperator/otpUserData", {
+            headers: {
+                'token': token
             }
-            console.log("newStateList", newStateList);
-            setUserListState(newStateList);
-        }).catch((err) => {
-            //console.log(err);
         })
+            .then(result => {
+                console.log("result from OTPOperator.js", result);
+                if (result.data.status === 'verified') {
+                    setLoggedInState({ ...loggedInState, email: result.data.email, status: 'loggedIn' });
+                    var newStateList = [];
+                    for (let obj of result.data.userData) {
+                        //console.log(obj);
+                        newStateList.push({ fullName: obj.fullName, tokenId: obj.tokenId, mobile_number: obj.mobileNumber, arr: [], otpVerification: obj.otpVerification, otpState: "not sent", otpValue: "", timer: 0 });
+                    }
+                    console.log("newStateList", newStateList);
+                    setUserListState(newStateList);
+                }
+                else
+                    setLoggedInState({ ...loggedInState, status: 'notLoggedIn' });
+            }).catch((err) => {
+                setLoggedInState({ ...loggedInState, status: 'networkError' });
+                //console.log(err);
+            })
+    }
+
+    const logoutMethod = () => {
+        const token = localStorage.getItem("token") || '';
+        axios.post("http://localhost:5000/api/internal/logoutRailwayOperator", {
+            email: loggedInState.email,
+            token: token
+        }).then((res) => {
+            console.log("res", res.data.status);
+            if(res.data.status === 'logged out'){
+                localStorage.removeItem("token");
+                setLoggedInState({ status: "notLoggedIn", email: '' });
+            }
+        });
     }
 
     useEffect(fetchUserData, []); // Initializes the state
@@ -94,7 +103,7 @@ function OTPOperator() {
             if (result.data.msg === "Device verified") {
                 console.log("Device Verified");
                 let newListState = [...userListState];
-                newListState[affectedIndex] = { ...newListState[affectedIndex], otpVerification: true};
+                newListState[affectedIndex] = { ...newListState[affectedIndex], otpVerification: true };
                 updateOtpVerification(tokenId);
                 setUserListState(newListState);
             }
@@ -220,9 +229,27 @@ function OTPOperator() {
         );
     };
 
+    if (loggedInState.status === 'notLoggedIn')
+        return <Redirect to="/loginRailway" />
+    else if (loggedInState.status === 'checking') {
+        return (
+            <div style={{ textAlign: "center", width: "100%" }}>
+                <br /><br />
+                <Spinner animation="border" variant="primary" />
+                <br /><br />
+            </div>
+        );
+    }
+    else if (loggedInState.status === 'networkError') {
+        return (
+            <div>
+                Network Error: Check your network connection and try again
+            </div>
+        );
+    }
+
     return (
         <div style={{ backgroundColor: "orange" }}>
-
 
             <Snackbar
                 anchorOrigin={{
@@ -252,18 +279,18 @@ function OTPOperator() {
             <div className="container">
                 <div className="mb-3">
                     <br />
+
+                    <RailwayOperatorActionBar email={loggedInState.email} logoutMethod={logoutMethod} />
+
                     <br />
-                    <div class="row">
-
-                        <div class="col-md-9 col-12">
+                    <div className="row">
+                        <div className="col-md-9 col-12">
                             <input type="text" className="form-control" value={searchState} onChange={searchChangeHandler} />
-
                         </div>
 
-                        <div class="col-md-3 col-12">
+                        <div className="col-md-3 col-12">
                             <Button variant="contained" color="primary" startIcon={<SearchIcon />}>Search</Button>
                         </div>
-
                     </div>
                 </div>
 
@@ -291,10 +318,10 @@ function OTPOperator() {
                 {
                     userListState.filter((obj) => obj.tokenId.includes(searchState))
                         .map((record, index) => (
-                            <div className={index % 2 ? "row recordRow stripe1" : "row recordRow stripe2"} key={record.tokenId}>
+                            <div className={index % 2 ? "row recordRow stripe1" : "row recordRow stripe2"} key={record.tokenId + record.fullName}>
                                 <div className="col-md-4 col-12">
                                     <div className="cell">
-                                        {record.tokenId}<br/>
+                                        {record.tokenId}<br />
                                         {`( ${record.fullName} )`}
                                     </div>
                                 </div>

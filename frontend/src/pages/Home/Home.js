@@ -87,75 +87,75 @@ function Home() {
       <div style={{
         backgroundImage: 'url("https://i.ytimg.com/vi/tBZRI-u1Q94/maxresdefault.jpg")',
         height: "600px", backgroundRepeat: "no-repeat", backgroundSize: "cover"
-      }} class="container-fluid col-sm-12 col-12 responsive">
+      }} className="container-fluid col-sm-12 col-12 responsive">
 
-        <div class="col-md-7 col-12" style={{backgroundColor: "rgba(255, 255, 255, 0.6)"}}>
-          <h1 class="ml-4 p-5 text-dark display-1">Indian Railways Tatkal Reservation</h1>
+        <div className="col-md-7 col-12" style={{backgroundColor: "rgba(255, 255, 255, 0.6)"}}>
+          <h1 className="ml-4 p-5 text-dark display-1">Indian Railways Tatkal Reservation</h1>
         </div>
       </div>
 
-      <div class="container my-3">
+      <div className="container my-3">
 
-        <h1 class="text-center text-primary" >About </h1>
-        <h5 class="text-center p-2">This initiative by Indian Railways Nagpur Region is taken to remove the hectic and time-consuming process of Offline Tatkal Reservation System. This system would be a boon to present system, to know Why, read below section.</h5>
-        <div class="row">
-          <div class="col-12 col-sm-6 bg-light shadow p-4">
-            <div class="row">
-              <div class="col-12 col-sm-6">
-                <h2 class="text-primary">No more waiting in Long Queues</h2>
+        <h1 className="text-center text-primary" >About </h1>
+        <h5 className="text-center p-2">This initiative by Indian Railways Nagpur Region is taken to remove the hectic and time-consuming process of Offline Tatkal Reservation System. This system would be a boon to present system, to know Why, read below section.</h5>
+        <div className="row">
+          <div className="col-12 col-sm-6 bg-light shadow p-4">
+            <div className="row">
+              <div className="col-12 col-sm-6">
+                <h2 className="text-primary">No more waiting in Long Queues</h2>
                 People used to wait in Lonq queues for their turn and a lot of them would need to return without any tickets. Now, to curb this we have a Token Giving System wherin only those users having the token could come at Railway Ticket Counter.
               </div>
-              <div class="col-12 col-sm-6">
+              <div className="col-12 col-sm-6">
                 <img src="https://resize.indiatvnews.com/en/resize/newbucket/715_-/2018/10/queue-1540400008.jpg" width="100%"></img>
               </div>
             </div>
 
 
           </div>
-          <div class="col-12 col-sm-6 bg-light shadow p-4">
-            <div class="row">
-              <div class="col-12 col-sm-6">
-                <h2 class="text-primary">No More Tedious Task of Form Filling</h2>
+          <div className="col-12 col-sm-6 bg-light shadow p-4">
+            <div className="row">
+              <div className="col-12 col-sm-6">
+                <h2 className="text-primary">No More Tedious Task of Form Filling</h2>
                 People don't tend to fill lengthy forms at railway station among so much crowd and had to haste for receiving tatkal ticket. Now using this platform people could fill their forms at their own comfort and could take their own time.
               </div>
-              <div class="col-12 col-sm-6">
+              <div className="col-12 col-sm-6">
                 <img src="https://www.irctcstationcode.com/wp-content/uploads/2014/12/Man-Validating-the-Forms.jpg" width="100%"></img>
               </div>
             </div>
           </div>
         </div>
 
-        <div class="row my-4">
-          <div class="col-12 col-sm-6 bg-light shadow p-3">
-            <div class="row">
-              <div class="col-12 col-sm-6">
-                <h2 class="text-primary">Probablity of Getting tickets would be High!!</h2>
+        <div className="row my-4">
+          <div className="col-12 col-sm-6 bg-light shadow p-3">
+            <div className="row">
+              <div className="col-12 col-sm-6">
+                <h2 className="text-primary">Probablity of Getting tickets would be High!!</h2>
                 People used to wait in Long queues from 4 AM in the morning and had to return as very few people could get Tatkal Tickets. <br />
                 But, now only few people would be able to come at Railway Counter for booking tickets and hence  your probablity of getting tickets would be More!!
               </div>
-              <div class="col-12 col-sm-6">
+              <div className="col-12 col-sm-6">
                 <img src="https://blog.railyatri.in/wp-content/uploads/2019/06/Trouble-Free-Booking.png" width="100%"></img>
               </div>
             </div>
 
 
           </div>
-          <div class="col-12 col-sm-6 bg-light shadow p-3">
-            <div class="row">
-              <div class="col-12 col-sm-6">
-                <h2 class="text-primary">Lot of Paperwork Reduced</h2>
+          <div className="col-12 col-sm-6 bg-light shadow p-3">
+            <div className="row">
+              <div className="col-12 col-sm-6">
+                <h2 className="text-primary">Lot of Paperwork Reduced</h2>
                 As responsibe citizens, our responsibity is to save Paper and going with these morals we are going with initiative of E-forms which would drastically reduce tonns of paper. Also paperwork for audit purpose would be eliminated as digital signatures would be taken from passengers.
               </div>
-              <div class="col-12 col-sm-6">
+              <div className="col-12 col-sm-6">
                 <img src="https://media.istockphoto.com/vectors/green-ecology-concept-paper-cut-style-vector-id1178245155?k=20&m=1178245155&s=612x612&w=0&h=6GkTK2kaF3WxdZXFoaTkzrJxh3fTGNsnKghx9vCfSjI=" width="100%"></img>
               </div>
             </div>
           </div>
         </div>
         <hr />
-        <div class="col-12 col-sm-8 my-3" style={{ margin: "auto" }}>
+        <div className="col-12 col-sm-8 my-3" style={{ margin: "auto" }}>
 
-          <h1 class="text-center text-primary" > How to Proceed?</h1>
+          <h1 className="text-center text-primary" > How to Proceed?</h1>
           < Chrono
             items={items}
             mode="VERTICAL_ALTERNATING"
@@ -172,14 +172,14 @@ function Home() {
 
         </div>
 
-        <div class="container col-9">
-          <h1 class="text-center text-primary my-2" >Recent Updates</h1>
+        <div className="container col-9">
+          <h1 className="text-center text-primary my-2" >Recent Updates</h1>
           <Carousel
             NextIcon={<NavigateNextIcon />}
             PrevIcon={<ArrowBackIosIcon />}
           >
-            <div class="row my-3">
-              <div class="col-12 col-sm-4">
+            <div className="row my-3">
+              <div className="col-12 col-sm-4">
                 <Card className={classes.root}>
                   <CardActionArea>
                     <CardMedia className={classes.media}
@@ -204,7 +204,7 @@ function Home() {
                 </Card>
 
               </div>
-              <div class="col-12 col-sm-4">
+              <div className="col-12 col-sm-4">
                 <Card className={classes.root}>
                   <CardActionArea>
                     <CardMedia className={classes.media}
@@ -229,7 +229,7 @@ function Home() {
                 </Card>
 
               </div>
-              <div class="col-12 col-sm-4">
+              <div className="col-12 col-sm-4">
                 <Card className={classes.root}>
                   <CardActionArea>
                     <CardMedia className={classes.media}
@@ -257,8 +257,8 @@ function Home() {
 
 
             </div>
-            <div class="row my-3">
-              <div class="col-12 col-sm-4">
+            <div className="row my-3">
+              <div className="col-12 col-sm-4">
                 <Card className={classes.root}>
                   <CardActionArea>
                     <CardMedia className={classes.media}
@@ -283,7 +283,7 @@ function Home() {
                 </Card>
 
               </div>
-              <div class="col-12 col-sm-4">
+              <div className="col-12 col-sm-4">
                 <Card className={classes.root}>
                   <CardActionArea>
                     <CardMedia className={classes.media}
@@ -308,7 +308,7 @@ function Home() {
                 </Card>
 
               </div>
-              <div class="col-12 col-sm-4">
+              <div className="col-12 col-sm-4">
                 <Card className={classes.root}>
                   <CardActionArea>
                     <CardMedia className={classes.media}
