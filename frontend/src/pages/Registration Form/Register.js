@@ -255,12 +255,12 @@ function Register() {
 
       {/* Header Section */}
 
-      <div className="container my-5 pb-5 shadow" style={{ backgroundColor: "orange", borderRadius: "8px" }}>
+      <div className="container my-5 pb-5 shadow" style={{ backgroundColor: "#00004d", borderRadius: "8px" }}>
 
-        <center><h1 style={{ backgroundColor: "#00004d" }} className="container shadow my-3 p-2 text-white" >Tatkal Form</h1></center>
+        <center><h1 style={{ backgroundColor: "#FFFFFFF" }} className="container shadow my-3 p-2 text-white" >Tatkal Form</h1></center>
 
 
-        <Card style={{ width: "80%", margin: "auto", backgroundColor: "white" }} className="p-2 shadow">
+        <Card style={{ width: "95%", margin: "auto", backgroundColor: "white" }} className="p-2 shadow">
           <CardContent>
             <form style={{ textAlign: "left" }}>
               <h5 style={{ color: "#00004d" }}>1. User Details</h5>
@@ -422,7 +422,7 @@ function Register() {
 
                   <TableContainer component={Paper}>
                     <Table className={classes.table} aria-label="simple table">
-                      <TableHead style={{ backgroundColor: "orange" }}>
+                      <TableHead style={{ backgroundColor: "lightgreen" }}>
                         <TableRow>
                           <TableCell>Name</TableCell>
                           <TableCell>Age</TableCell>
@@ -496,7 +496,7 @@ function Register() {
                   <h6>For children (Below 5 years):</h6>
                   <TableContainer component={Paper}>
                     <Table className={classes.table} aria-label="simple table">
-                      <TableHead style={{ backgroundColor: "orange" }}>
+                      <TableHead style={{ backgroundColor: "lightgreen" }}>
                         <TableRow>
                           <TableCell>Name</TableCell>
                           <TableCell>Age</TableCell>
@@ -560,7 +560,7 @@ function Register() {
                       shrink: true,
                     }}
                   />
-
+{/* 
                   <h6>Upload Signature (For Audit Purpose)</h6>
                   <input
                     accept="image/*"
@@ -591,7 +591,7 @@ function Register() {
                         </div>
                       </div>
                     </div>
-                  </div>
+                  </div> */}
                 </div>
 
               </div>

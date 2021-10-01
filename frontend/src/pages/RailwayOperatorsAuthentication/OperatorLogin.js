@@ -79,11 +79,13 @@ function OperatorLogin(props) {
     }
 
     return (
-        <div style={{ padding: "10px", margin: "10px" }}>
+        <div>
             <form>
-                <TextField id="email" type="email" onBlur={inputHandler} defaultValue={formState.email} name="email" label="Email" />
+            <h2 class="text-center my-3">Operator Login Page</h2>
+            <div class="p-5 shadow bg-light my-4 text-center" style={{margin: "auto",width:"50vh"}}>
+                <TextField color="secondary" id="email" type="email" onBlur={inputHandler} defaultValue={formState.email} name="email" label="Email" />
                 <br /><br />
-                <TextField id="password" type="password" onBlur={inputHandler} defaultValue={formState.password} name="password" label="Password" />
+                <TextField color="secondary" id="password" type="password" onBlur={inputHandler} defaultValue={formState.password} name="password" label="Password" />
                 <br /><br />
 
                 <div className={loadingState ? "d-block" : "d-none"} style={{ textAlign: "center", width: "100%" }}>
@@ -93,11 +95,11 @@ function OperatorLogin(props) {
                 <Button disabled={loadingState} variant="contained" onClick={handleFormSubmission} color="primary" style={{ margin: "auto" }}>
                     Login
                 </Button>
-
+            
                 <div>
-                    {loginInfo}
+                    {loginInfo} 
                 </div>
-
+            </div>
             </form>
         </div>
     );

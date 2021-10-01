@@ -20,6 +20,9 @@ import SearchIcon from '@material-ui/icons/Search';
 import { Redirect } from 'react-router-dom';
 import Spinner from 'react-bootstrap/Spinner';
 import RailwayOperatorActionBar from '../../components/RailwayOperatorActionBar/RailwayOperatorActionBar';
+import Table from 'react-bootstrap/Table';
+import Alert from 'react-bootstrap/Alert';
+import SignalCellularConnectedNoInternet2BarIcon from '@material-ui/icons/SignalCellularConnectedNoInternet2Bar';
 
 function OTPOperator() {
 
@@ -242,14 +245,15 @@ function OTPOperator() {
     }
     else if (loggedInState.status === 'networkError') {
         return (
-            <div>
-                Network Error: Check your network connection and try again
-            </div>
+            <Alert variant="warning">
+            <Alert.Heading>Network Error!!</Alert.Heading>
+              Check your network connection and try again <SignalCellularConnectedNoInternet2BarIcon/>
+            </Alert>
         );
     }
 
     return (
-        <div style={{ backgroundColor: "orange" }}>
+        <div>
 
             <Snackbar
                 anchorOrigin={{
@@ -275,76 +279,59 @@ function OTPOperator() {
             />
 
 
-
+           <RailwayOperatorActionBar email={loggedInState.email} logoutMethod={logoutMethod} />
             <div className="container">
-                <div className="mb-3">
-                    <br />
-
-                    <RailwayOperatorActionBar email={loggedInState.email} logoutMethod={logoutMethod} />
-
-                    <br />
-                    <div className="row">
-                        <div className="col-md-9 col-12">
+                <div>
+                    <div className="row m-3">
+                        <div className="col-md-6 col-12">
                             <input type="text" className="form-control" value={searchState} onChange={searchChangeHandler} />
                         </div>
 
                         <div className="col-md-3 col-12">
                             <Button variant="contained" color="primary" startIcon={<SearchIcon />}>Search</Button>
                         </div>
+
+                        <div className="col-md-3 col-12">
+                            <Button variant="contained" color="secondary">Fetch Today's Passengers</Button>
+                        </div>
                     </div>
                 </div>
 
-                <div className="row recordRow bg-dark">
-                    <div className="col-md-4 col-12">
-                        <div className="cell text-white">
-                            Token ID
-                        </div>
-                    </div>
-
-                    <div className="col-md-4 col-12">
-                        <div className="cell text-white">
-                            Action
-                        </div>
-                    </div>
-
-                    <div className="col-md-4 col-12">
-                        <div className="cell text-white">
-                            Status
-                        </div>
-                    </div>
-
-                </div>
-
-                {
+                <Table striped bordered hover variant="dark">
+                    <thead>
+                        <tr>
+                        <th>#</th>
+                        <th>Token Number</th>
+                        <th>Name of Passenger</th>
+                        <th>Action</th>
+                        <th>Authentication Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {
                     userListState.filter((obj) => obj.tokenId.includes(searchState))
                         .map((record, index) => (
-                            <div className={index % 2 ? "row recordRow stripe1" : "row recordRow stripe2"} key={record.tokenId + record.fullName}>
-                                <div className="col-md-4 col-12">
-                                    <div className="cell">
-                                        {record.tokenId}<br />
-                                        {`( ${record.fullName} )`}
-                                    </div>
-                                </div>
+                            <tr key={record.tokenId + record.fullName} style={{padding:"5px"}}>
+                                        <td>{index+1}</td>
+                                        <td>{record.tokenId}</td>
+                                        <td>{record.fullName}</td>
+                            
+                                        <td>{
+                                                        otpStateRenderer(record)
 
-                                <div className="col-md-4 col-12">
-                                    <div className="cell">
-                                        {
-                                            otpStateRenderer(record)
+                                        }</td>
+                                        
+                                        {record.otpVerification ? <td>Verified</td> : <td class="bg-danger">Not Verified</td>} 
+                
+                           </tr>
 
-                                        }
-                                    </div>
-                                </div>
-
-                                <div className="col-md-4 col-12">
-                                    <div className="cell">
-                                        {record.otpVerification ? "Verified" : "Not Verified"}
-                                    </div>
-                                </div>
-
-                            </div>
                         )
                         )
                 }
+                        
+                        
+                    </tbody>
+                    </Table>
 
             </div>
         </div>

@@ -25,6 +25,8 @@ import axios from 'axios'
 import RailwayOperatorActionBar from '../../components/RailwayOperatorActionBar/RailwayOperatorActionBar';
 import Spinner from 'react-bootstrap/Spinner';
 import {Redirect} from 'react-router-dom';
+import Alert from 'react-bootstrap/Alert';
+import SignalCellularConnectedNoInternet2BarIcon from '@material-ui/icons/SignalCellularConnectedNoInternet2Bar';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -131,23 +133,28 @@ function CounterOperator() {
     }
     else if (loggedInState.status === 'networkError') {
         return (
-            <div>
-                Network Error: Check your network connection and try again
-            </div>
+          <Alert variant="warning">
+          <Alert.Heading>Network Error!!</Alert.Heading>
+            Check your network connection and try again <SignalCellularConnectedNoInternet2BarIcon/>
+          </Alert>
+           
         );
     }
 
   if (Object.keys(data).length === 0 && data.constructor === Object) {
     return (
+     
       <div>
-        <div className="container my-1 pb-5 shadow" style={{ backgroundColor: "orange", borderRadius: "8px" }}>
+
+        <RailwayOperatorActionBar email={loggedInState.email} logoutMethod={logoutMethod} />
+        <div className="container my-3 pb-2 shadow" style={{ backgroundColor: "#00004d", borderRadius: "8px" }}>
           <br/>
-          <RailwayOperatorActionBar email={loggedInState.email} logoutMethod={logoutMethod} />
+          
 
-          <center><h1 style={{ backgroundColor: "#00004d" }} className="container shadow my-3 p-2 text-white" >User : </h1></center>
+          <center><h1 style={{ backgroundColor: "#00004d" }} className="container shadow my-2 p-2 text-white" >Fetch Passenger Details </h1></center>
 
 
-          <Card style={{ width: "80%", margin: "auto", backgroundColor: "white" }} className="p-2 shadow">
+          <Card style={{ width: "90%", margin: "auto", backgroundColor: "white" }} className="p-2 mb-4 shadow">
             <CardContent>
 
               <form className="p-2" style={{ textAlign: "left" }}>
@@ -155,7 +162,7 @@ function CounterOperator() {
                 <div className="row col-12">
                   <div className="col-12 col-sm-4 my-1">
                     <input type="text" placeholder="Enter Token ID"
-                      onChange={(e) => setId(e.target.value)}
+                      onChange={(e) => setId(e.target.value)} 
                     />
                   </div>
                   <div className="col-12 col-sm-4 my-1">
@@ -169,152 +176,9 @@ function CounterOperator() {
                 </div>
               </form>
 
-              <hr />
+              
 
-              <form style={{ textAlign: "left" }}>
-                <h5 style={{ color: "#00004d" }}>1. User Details</h5>
-                <div className="row" style={{ fontSize: "18px" }}>
-                  <div className="col-12 col-sm-6">
-                    <b>Full Name: </b> {data.fullName} <br />
-                    <b>Date of Birth (DOB): {data.dateOfBirth} </b> <br />
-                    <b>Mobile Number: </b> {data.fullName} <br />
-                    <b>Aadhar Card Number: </b> {data.aadharNumber} <br />
-                  </div>
-
-                  <div className="col-12 col-sm-6">
-                    <b>Source Station: </b> {data.sourceStation} <br />
-                    <b>Detination Station: </b> {data.destinationStation} <br />
-                    <b>Boarding Station: </b> {data.boardingStation} <br />
-                    <b>Reservation Up To: </b> {data.reservationUpTo} <br />
-                  </div>
-
-
-
-                </div>
-
-
-                {/* Preferences Section */}
-                <Divider variant="middle" className="my-3" style={{ fontWeight: "5px", color: "black" }} />
-
-                <h5 style={{ color: "#00004d" }}>2. Preferences</h5>
-
-                <div className="row">
-                  <div className="col-sm-3 col-12 my-2">
-                    <h6>Preference for Trains:</h6>
-                    <br />
-                    <FormControlLabel
-                      control={<Checkbox onChange={handleChange} name="checkedA" />}
-                      label="Any Possible Train"
-                    />
-                  </div>
-                  <div className="col-sm-3 col-12 my-2">
-                    Preference 1:
-                  </div>
-                  <div className="col-sm-3 col-12 my-2">
-                    Preference 2:
-                  </div>
-                  <div className="col-sm-3 col-12 my-2">
-                    Preference 3:
-                  </div>
-                </div>
-
-                <div className="row">
-                  <div className="col-sm-3 col-12 my-2">
-                    <h6>Preference for Class:</h6>
-                    <br />
-                    <FormControlLabel
-                      control={<Checkbox onChange={handleChange} name="checkedB" />}
-                      label="Any Class"
-                    />
-                  </div>
-                  <div className="col-sm-3 col-12 my-2">
-
-                    Class Preference 1:
-                  </div>
-
-                  <div className="col-sm-3 col-12 my-2">
-                    Class Preference 2:
-                  </div>
-
-                  <div className="col-sm-3 col-12 my-2">
-                    Class Preference 3:
-                  </div>
-                </div>
-
-
-                {/* Passenger Section */}
-                <Divider variant="middle" className="my-3" style={{ fontWeight: "5px", color: "black" }} />
-
-                <h5 style={{ color: "#00004d" }}>3. Passenger Details</h5>
-                <div className="row">
-                  <div className="col-sm-7 col-12">
-
-                    <TableContainer component={Paper}>
-                      <Table className={classes.table} aria-label="simple table">
-                        <TableHead style={{ backgroundColor: "orange" }}>
-                          <TableRow>
-                            <TableCell>Name</TableCell>
-                            <TableCell>Age</TableCell>
-                            <TableCell>Gender</TableCell>
-                            <TableCell>Berth Preference</TableCell>
-
-                          </TableRow>
-                        </TableHead>
-                        <TableBody>
-                          {[Array].map((d, index) => (
-                            <TableRow key={index}>
-                              <TableCell>Yash</TableCell>
-                              <TableCell>20</TableCell>
-                              <TableCell>21</TableCell>
-                              <TableCell>Lower</TableCell>
-
-                            </TableRow>
-                          ))}
-                        </TableBody>
-                      </Table>
-                    </TableContainer>
-                  </div>
-
-
-                  <div className="col-sm-5 col-12">
-                    <h6>For children (Below 5 years):</h6>
-                    <TableContainer component={Paper}>
-                      <Table className={classes.table} aria-label="simple table">
-                        <TableHead style={{ backgroundColor: "orange" }}>
-                          <TableRow>
-                            <TableCell>Name</TableCell>
-                            <TableCell>Age</TableCell>
-                            <TableCell>Gender</TableCell>
-
-                          </TableRow>
-                        </TableHead>
-                        <TableBody>
-                          {[...Array(1)].map((row, index) => (
-                            <TableRow key={index}>
-                              <TableCell>Yash Agrawal</TableCell>
-                              <TableCell>3</TableCell>
-                              <TableCell>Male</TableCell>
-
-                            </TableRow>
-                          ))}
-                        </TableBody>
-                      </Table>
-                    </TableContainer>
-
-                    {/* date of travel    */}
-                    <h5 className="my-3">Date of Travel:</h5>
-
-
-                    {/* signature */}
-
-                    <h5>Digital Signature (For Audit Purpose)</h5>
-
-
-                  </div>
-
-                </div>
-
-              </form>
+             
 
             </CardContent>
 
@@ -327,12 +191,13 @@ function CounterOperator() {
   else {
     return (
       <div>
-        <div className="container my-1 pb-5 shadow" style={{ backgroundColor: "orange", borderRadius: "8px" }}>
+      <RailwayOperatorActionBar email={loggedInState.email} logoutMethod={logoutMethod} />
+        <div className="container my-3 pb-5 shadow" style={{ backgroundColor: "#00004d", borderRadius: "8px" }}>
 
-          <center><h1 style={{ backgroundColor: "#00004d" }} className="container shadow my-3 p-2 text-white" >Operator 1 Console</h1></center>
+          <center><h1 style={{ backgroundColor: "#00004d" }} className="container shadow my-2 p-2 text-white" >Operator 1 Console</h1></center>
 
 
-          <Card style={{ width: "80%", margin: "auto", backgroundColor: "white" }} className="p-2 shadow">
+          <Card style={{ width: "90%", margin: "auto", backgroundColor: "white" }} className="p-2 shadow">
             <CardContent>
 
               <form className="p-2" style={{ textAlign: "left" }}>
@@ -380,12 +245,12 @@ function CounterOperator() {
 
                 {/* Preferences Section */}
                 <Divider variant="middle" className="my-3" style={{ fontWeight: "5px", color: "black" }} />
-
+                <h5 style={{ color: "#00004d" }}>2. Preference Details</h5>
 
                 {data.prefernceTrain.allTrain === true ?
                   (
                     <div>
-                      <h5>{data.fullName} is open to all Trains</h5>
+                    <h5>Preference for Trains:</h5> Any possible Train
                     </div>
                   )
                   :
@@ -396,13 +261,13 @@ function CounterOperator() {
                         <br />
                       </div>
                       <div className="col-sm-3 col-12 my-2">
-                        Preference 1: {data.prefernceTrain.train1}
+                        <b>Preference 1:</b> {data.prefernceTrain.train1}
                       </div>
                       <div className="col-sm-3 col-12 my-2">
-                        Preference 2: {data.prefernceTrain.train2}
+                      <b>Preference 2:</b> {data.prefernceTrain.train2}
                       </div>
                       <div className="col-sm-3 col-12 my-2">
-                        Preference 3: {data.prefernceTrain.train3}
+                      <b>Preference 3:</b> {data.prefernceTrain.train3}
                       </div>
                     </div>
                   )
@@ -417,7 +282,7 @@ function CounterOperator() {
                 {data.prefernceClass.allClass === true ?
                   (
                     <div>
-                      <h5>{data.fullName} is open to all Classes</h5>
+                    <h5>Preference for Class:</h5> Any Class
                     </div>
                   )
                   :
@@ -428,13 +293,13 @@ function CounterOperator() {
                         <br />
                       </div>
                       <div className="col-sm-3 col-12 my-2">
-                        Preference 1: {data.prefernceClass.class1}
+                        <b>Preference 1:</b> {data.prefernceClass.class1}
                       </div>
                       <div className="col-sm-3 col-12 my-2">
-                        Preference 2: {data.prefernceClass.class2}
+                      <b>Preference 2:</b> {data.prefernceClass.class2}
                       </div>
                       <div className="col-sm-3 col-12 my-2">
-                        Preference 3: {data.prefernceClass.class3}
+                      <b>Preference 3:</b> {data.prefernceClass.class3}
                       </div>
                     </div>
                   )
@@ -451,7 +316,7 @@ function CounterOperator() {
 
                     <TableContainer component={Paper}>
                       <Table className={classes.table} aria-label="simple table">
-                        <TableHead style={{ backgroundColor: "orange" }}>
+                        <TableHead style={{ backgroundColor: "lightgreen" }}>
                           <TableRow>
                             <TableCell>Name</TableCell>
                             <TableCell>Age</TableCell>
@@ -480,7 +345,7 @@ function CounterOperator() {
                     <h6>For children (Below 5 years):</h6>
                     <TableContainer component={Paper}>
                       <Table className={classes.table} aria-label="simple table">
-                        <TableHead style={{ backgroundColor: "orange" }}>
+                        <TableHead style={{ backgroundColor: "lightgreen" }}>
                           <TableRow>
                             <TableCell>Name</TableCell>
                             <TableCell>Age</TableCell>
