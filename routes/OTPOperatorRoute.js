@@ -2,8 +2,8 @@ const router = require("express").Router();
 const User = require("../models/User");
 
 const crypto = require('crypto')
-const accountSid = "AC4240c3a8115408d2aedda468797fbc5d"
-const authToken = "ef05b9dd938083b17433be4b831ce19b"
+const authToken = "bfd1840dfa71619e72417ba31f7ca7ce"
+const accountSid = "AC6b62318bc7f96a1f16424b2bc447bdac"
 const client = require('twilio')(accountSid, authToken)
 let refreshTokens = []
 
@@ -45,14 +45,14 @@ router.post('/sendOTP', (req, resp) => {
     const hash = crypto.createHmac('sha256', smsKey).update(data).digest('hex')
     const fullHash = `${hash}.${expires}`
 
-    // client.messages.create({
-    //     body : `Your OTP for TATKAL RESERVATION is ${otp}`,
-    //     from: +14804781664,
-    //     to : phone
-    // }).then((messages)=>{
-    //     console.log(messages)
+    client.messages.create({
+        body : `Your OTP for TATKAL RESERVATION is ${otp}`,
+        from: '+16892154007',
+        to : phone
+    }).then((messages)=>{
+        console.log(messages)
 
-    // }).catch((err)=> console.error(err))
+    }).catch((err)=> console.error(err))
 
     resp.status(200).send({ phone, hash: fullHash, otp })
 })

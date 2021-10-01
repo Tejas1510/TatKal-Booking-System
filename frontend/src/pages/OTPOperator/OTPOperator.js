@@ -29,6 +29,16 @@ function OTPOperator() {
     const [userListState, setUserListState] = useState([]);
     const [loggedInState, setLoggedInState] = useState({ status: 'checking', email: '' });
 
+    const [fetchedPassengerData,setFetchedPassengerData] = useState([])
+    const fetchPassengerData = (e) => {
+        axios.get("http://localhost:5000/api/randomToken/")
+        .then(response => {
+            setFetchedPassengerData(response.data)
+        })
+        ;
+        console.log(fetchedPassengerData)
+    }
+
     const fetchUserData = () => {
         const token = localStorage.getItem("token") || '';
         axios.get("http://localhost:5000/api/otpOperator/otpUserData", {
@@ -292,7 +302,7 @@ function OTPOperator() {
                         </div>
 
                         <div className="col-md-3 col-12">
-                            <Button variant="contained" color="secondary">Fetch Today's Passengers</Button>
+                            <Button variant="contained" color="secondary" onClick={fetchPassengerData}>Fetch Today's Passengers</Button>
                         </div>
                     </div>
                 </div>

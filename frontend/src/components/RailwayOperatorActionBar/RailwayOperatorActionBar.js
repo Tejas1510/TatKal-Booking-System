@@ -23,14 +23,14 @@ function RailwayOperatorActionBar(props) {
                         <Nav.Link href="/counter_op">Passenger Details</Nav.Link>
                         </Nav>
                         <Nav>
-                        <Nav.Link href="/contactus">Contact Us</Nav.Link>
+                        {/* <Nav.Link href="/contactus">Contact Us</Nav.Link> */}
                         <Nav.Link href="#"><AccountCircleIcon/> {props.email}</Nav.Link>
                         </Nav>
                         <Button style={{marginLeft:"15px"}} variant="contained" onClick={props.logoutMethod} color="primary">Logout</Button>
         
                         <Badge pill bg="success" style={{marginLeft:"20px",padding:"8px"}}>
-                           Date: {moment().format("DD-MM-YYYY")} <br/>
-                           Time: {moment().format("hh:mm:ss")}
+                           Date: {moment().format("DD-MM-YYYY")}
+                           {/* Time: {moment().format("hh:mm:ss")} */}
                         </Badge>
                     </Navbar.Collapse>
                     </Container>

@@ -18,7 +18,7 @@ function MainNavbar() {
                         <Nav.Link href="/register">Book Ticket</Nav.Link>
                         </Nav>
                         <Nav>
-                        <Nav.Link href="/contactus">Contact Us</Nav.Link>
+                        {/* <Nav.Link href="/contactus">Contact Us</Nav.Link> */}
                         </Nav>
                         <Button style={{marginLeft:"18px"}} variant="light" href="/loginRailway">Operator Login</Button> 
                           

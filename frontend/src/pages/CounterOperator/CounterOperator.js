@@ -247,7 +247,7 @@ function CounterOperator() {
                 <Divider variant="middle" className="my-3" style={{ fontWeight: "5px", color: "black" }} />
                 <h5 style={{ color: "#00004d" }}>2. Preference Details</h5>
 
-                {data.prefernceTrain.allTrain === true ?
+                {data.preferenceTrain.allTrain === true ?
                   (
                     <div>
                     <h5>Preference for Trains:</h5> Any possible Train
@@ -261,13 +261,13 @@ function CounterOperator() {
                         <br />
                       </div>
                       <div className="col-sm-3 col-12 my-2">
-                        <b>Preference 1:</b> {data.prefernceTrain.train1}
+                        <b>Preference 1:</b> {data.preferenceTrain.train1}
                       </div>
                       <div className="col-sm-3 col-12 my-2">
-                      <b>Preference 2:</b> {data.prefernceTrain.train2}
+                      <b>Preference 2:</b> {data.preferenceTrain.train2}
                       </div>
                       <div className="col-sm-3 col-12 my-2">
-                      <b>Preference 3:</b> {data.prefernceTrain.train3}
+                      <b>Preference 3:</b> {data.preferenceTrain.train3}
                       </div>
                     </div>
                   )
@@ -279,7 +279,7 @@ function CounterOperator() {
                 <Divider variant="middle" className="my-3" style={{ fontWeight: "5px", color: "black" }} />
 
 
-                {data.prefernceClass.allClass === true ?
+                {data.preferenceClass.allClass === true ?
                   (
                     <div>
                     <h5>Preference for Class:</h5> Any Class
@@ -293,13 +293,13 @@ function CounterOperator() {
                         <br />
                       </div>
                       <div className="col-sm-3 col-12 my-2">
-                        <b>Preference 1:</b> {data.prefernceClass.class1}
+                        <b>Preference 1:</b> {data.preferenceClass.class1}
                       </div>
                       <div className="col-sm-3 col-12 my-2">
-                      <b>Preference 2:</b> {data.prefernceClass.class2}
+                      <b>Preference 2:</b> {data.preferenceClass.class2}
                       </div>
                       <div className="col-sm-3 col-12 my-2">
-                      <b>Preference 3:</b> {data.prefernceClass.class3}
+                      <b>Preference 3:</b> {data.preferenceClass.class3}
                       </div>
                     </div>
                   )
