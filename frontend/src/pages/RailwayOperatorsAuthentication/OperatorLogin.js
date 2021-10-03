@@ -24,7 +24,7 @@ function OperatorLogin(props) {
 
     useEffect(() => {
         const token = localStorage.getItem("token") || '';
-        axios.post("http://localhost:5000/api/internal/authenticateRailwayOperator", {}, {
+        axios.post("https://tatkal-reservation-system.herokuapp.com/api/internal/authenticateRailwayOperator", {}, {
             headers: {
                 'token': token
             }
@@ -45,7 +45,7 @@ function OperatorLogin(props) {
         setLoadingState(true);
         setLoginInfo('');
 
-        const res = axios.post('http://localhost:5000/api/internal/loginRailwayOperator',
+        const res = axios.post('https://tatkal-reservation-system.herokuapp.com/api/internal/loginRailwayOperator',
             formState)
             .then((response) => {
                 console.log("response", response);

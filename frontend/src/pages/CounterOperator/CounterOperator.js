@@ -66,7 +66,7 @@ function CounterOperator() {
 
   const logoutMethod = () => {
     const token = localStorage.getItem("token") || '';
-    axios.post("http://localhost:5000/api/internal/logoutRailwayOperator", {
+    axios.post("https://tatkal-reservation-system.herokuapp.com/api/internal/logoutRailwayOperator", {
       email: loggedInState.email,
       token: token
     }).then((res) => {
@@ -80,7 +80,7 @@ function CounterOperator() {
 
   useEffect(() => {
     const token = localStorage.getItem("token") || '';
-    axios.post("http://localhost:5000/api/internal/authenticateRailwayOperator", {}, {
+    axios.post("https://tatkal-reservation-system.herokuapp.com/api/internal/authenticateRailwayOperator", {}, {
       headers: {
         'token': token
       }
@@ -112,7 +112,7 @@ function CounterOperator() {
   const fetchDetails = (e, id) => {
     // e.preventDeafault()
     console.log(id)
-    axios.get(`http://localhost:5000/api/userdata/?id=${id}`)
+    axios.get(`https://tatkal-reservation-system.herokuapp.com/api/userdata/?id=${id}`)
       .then((response) => {
         setData(response.data[0])
       });
