@@ -34,6 +34,7 @@ const storage = multer.diskStorage({
   },
 });
 
+
 const upload = multer({ storage: storage });
 
 app.post("/api/upload", upload.single("file"), (req, res) => {
@@ -45,6 +46,12 @@ app.use("/api/otpOperator", OTPOperatorRoute);
 app.use("/api/randomToken", randomTokenRoute);
 app.use("/api/internal", internalRoute);
 
-app.listen("5000", () => {
+app.get('/',(req,res) =>{
+  res.send("Welcome to India Railway Tatkal Reservation System")
+})
+
+const PORT = process.env.PORT || 5000
+
+app.listen(PORT, () => {
   console.log("Backend is running.");
 });
