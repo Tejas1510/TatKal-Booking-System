@@ -18,18 +18,31 @@ function sendSMS(tokenid,mobileNumber) {
 .then((message)=>console.log(message.sid)); 
 }
 
+function convertDate(inputFormat) {
+  function pad(s) { return (s < 10) ? '0' + s : s; }
+  var d = new Date(inputFormat)
+  return [d.getFullYear(),pad(d.getMonth()+1),pad(d.getDate()), ].join('-')
+}
+
+const sampleSize = ([...arr], n) => {
+  let m = arr.length;
+  while (m) {
+    const i = Math.floor(Math.random() * m--);
+    [arr[m], arr[i]] = [arr[i], arr[m]];
+  }
+  return arr.slice(0, n);
+};
+
+
+
 router.get('/', async(req,res) => {
     try{
-      console.log("IN Random Token")
-      const userData = await User.aggregate([{ $sample: { size: 2 } }])
-      console.log(userData)
-      console.log(userData.length)
+      const date = convertDate(new Date())
+      console.log(date)
+      const subData = await User.find({dateOfTravel:date})
+      const userData = sampleSize(subData,3)
       for (let i = 0; i < userData.length; i++) {
-        if(userData[i].selectedUser===false){
-          sendSMS(userData[i].tokenId,userData[i].mobileNumber
-            )
-          userData[i].selectedUser=true;
-        }
+        sendSMS(userData[i].tokenId,userData[i].mobileNumber)
       }
       res.status(200).send(userData)
     }
