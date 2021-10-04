@@ -268,7 +268,6 @@ function OTPOperator() {
 
     return (
         <div>
-
             <Snackbar
                 anchorOrigin={{
                     horizontal: "left",

@@ -24,7 +24,7 @@ function RailwayOperatorActionBar(props) {
                         </Nav>
                         <Nav>
                         {/* <Link href="/contactus">Contact Us</Link> */}
-                        <Link href="#"><AccountCircleIcon/> {props.email}</Link>
+                        <span class="text-white"><AccountCircleIcon/> {props.email}</span>
                         </Nav>
                         <Button style={{marginLeft:"15px"}} variant="contained" onClick={props.logoutMethod} color="primary">Logout</Button>
         

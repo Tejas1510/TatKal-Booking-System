@@ -20,7 +20,7 @@ function MainNavbar() {
                         <Nav>
                         {/* <Nav.Link to="/contactus">Contact Us</Nav.Link> */}
                         </Nav>
-                        <Button style={{marginLeft:"18px"}} variant="light"><Link to="/loginRailway">Operator Login </Link></Button> 
+                        <Button style={{marginLeft:"18px"}} variant="light" ><Link to="/loginRailway" style={{textDecoration:"none"}}>Operator Login </Link></Button> 
                           
                         
                     </Navbar.Collapse>
