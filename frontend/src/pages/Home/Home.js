@@ -43,7 +43,7 @@ function Home() {
     media: {
       type: "IMAGE",
       source: {
-        url: "http://blog.clickdimensions.com/wp-content/uploads/2017/07/BlogFeatureImage-Ways-to-use-SMS-with-Customers-v1.png"
+        url: "https://www.zipwhip.com/wp-content/uploads/2019/05/what-is-sms-1.png"
       }
     }
   },
@@ -76,7 +76,7 @@ function Home() {
     media: {
       type: "IMAGE",
       source: {
-        url: "https://lh3.googleusercontent.com/proxy/d2VX0X7SAXtzwiaI2PUUOD--33cvlfnRXCeEoOv_yxjDRPVkHbgEf4jeFKYa24kaohfnGAxXdFbSoDxoeRk2CYaImK6vW1f36f56PjSm5xguXKfG3Dc"
+        url: "https://static.toiimg.com/thumb/msid-75899581,width-1200,height-900,resizemode-4/.jpg"
       }
     }
   }];

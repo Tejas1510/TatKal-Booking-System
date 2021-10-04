@@ -22,10 +22,8 @@ function RailwayOperatorActionBar(props) {
                         <Nav.Link href="/otp_op">Authenticate Passengers</Nav.Link>
                         <Nav.Link href="/counter_op">Passenger Details</Nav.Link>
                         </Nav>
-                        <Nav>
-                        {/* <Nav.Link href="/contactus">Contact Us</Nav.Link> */}
-                        <Nav.Link href="#"><AccountCircleIcon/> {props.email}</Nav.Link>
-                        </Nav>
+                        
+                        <span class="text-white ml-2"><AccountCircleIcon/> {props.email}</span>
                         <Button style={{marginLeft:"15px"}} variant="contained" onClick={props.logoutMethod} color="primary">Logout</Button>
         
                         <Badge pill bg="success" style={{marginLeft:"20px",padding:"8px"}}>
