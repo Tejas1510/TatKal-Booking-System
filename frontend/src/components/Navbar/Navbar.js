@@ -3,7 +3,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button'
-
+import {Link} from 'react-router-dom'
 function MainNavbar() {
     return (
         <div>
@@ -14,13 +14,13 @@ function MainNavbar() {
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="me-auto">
-                        <Nav.Link href="/">Home</Nav.Link>
-                        <Nav.Link href="/register">Book Ticket</Nav.Link>
+                        <Link to="/" style={{textDecoration:'none',color:'white',padding:'5px'}}>Home</Link>
+                        <Link style={{textDecoration:'none',color:'white',padding:'5px'}} to="/register">Book Ticket</Link>
                         </Nav>
                         <Nav>
-                        {/* <Nav.Link href="/contactus">Contact Us</Nav.Link> */}
+                        {/* <Nav.Link to="/contactus">Contact Us</Nav.Link> */}
                         </Nav>
-                        <Button style={{marginLeft:"18px"}} variant="light" href="/loginRailway">Operator Login</Button> 
+                        <Button style={{marginLeft:"18px"}} variant="light"><Link to="/loginRailway">Operator Login </Link></Button> 
                           
                         
                     </Navbar.Collapse>

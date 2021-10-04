@@ -7,7 +7,7 @@ import Container from 'react-bootstrap/Container';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import moment from "moment";
 import Badge from 'react-bootstrap/Badge'
-
+import {Link} from 'react-router-dom'
 function RailwayOperatorActionBar(props) {
     return (
         <div>
@@ -17,14 +17,14 @@ function RailwayOperatorActionBar(props) {
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="me-auto">
-                        <Nav.Link href="/">Home</Nav.Link>
-                        <Nav.Link href="/register">Book Ticket</Nav.Link>
-                        <Nav.Link href="/otp_op">Authenticate Passengers</Nav.Link>
-                        <Nav.Link href="/counter_op">Passenger Details</Nav.Link>
+                        <Link style={{textDecoration:'none',color:'white',padding:'5px'}} to="/">Home</Link>
+                        <Link style={{textDecoration:'none',color:'white',padding:'5px'}} to="/register">Book Ticket</Link>
+                        <Link style={{textDecoration:'none',color:'white',padding:'5px'}} to="/otp_op">Authenticate Passengers</Link>
+                        <Link style={{textDecoration:'none',color:'white',padding:'5px'}} to="/counter_op">Passenger Details</Link>
                         </Nav>
                         <Nav>
-                        {/* <Nav.Link href="/contactus">Contact Us</Nav.Link> */}
-                        <Nav.Link href="#"><AccountCircleIcon/> {props.email}</Nav.Link>
+                        {/* <Link href="/contactus">Contact Us</Link> */}
+                        <Link href="#"><AccountCircleIcon/> {props.email}</Link>
                         </Nav>
                         <Button style={{marginLeft:"15px"}} variant="contained" onClick={props.logoutMethod} color="primary">Logout</Button>
         

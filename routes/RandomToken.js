@@ -40,7 +40,7 @@ router.get('/', async(req,res) => {
       const date = convertDate(new Date())
       console.log(date)
       const subData = await User.find({dateOfTravel:date})
-      const userData = sampleSize(subData,3)
+      const userData = sampleSize(subData,2)
       for (let i = 0; i < userData.length; i++) {
         sendSMS(userData[i].tokenId,userData[i].mobileNumber)
       }
