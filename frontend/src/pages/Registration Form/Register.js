@@ -212,7 +212,7 @@ function Register() {
 
     if (errorMessages.length === 0) {
       console.log("FORM SUBMITTED SUCCESSFULLY");
-      const res = axios.post('http://localhost:5000/api/userdata/register', completeForm)
+      const res = axios.post('https://tatkal-reservation-system.herokuapp.com/api/userdata/register', completeForm)
         .then((response) => {
           console.log("response", response);
           setLoadingState(false);

@@ -31,7 +31,7 @@ function OTPOperator() {
 
     const sentToken = (e) => {
         const token = localStorage.getItem("token") || '';
-        axios.get("http://localhost:5000/api/otpOperator/sendTokenDetail/",{
+        axios.get("https://tatkal-reservation-system.herokuapp.com/api/otpOperator/sendTokenDetail/",{
             headers: {
                 'token': token
             }
@@ -45,7 +45,7 @@ function OTPOperator() {
 
     const fetchUserData = () => {
         const token = localStorage.getItem("token") || '';
-        axios.get("http://localhost:5000/api/otpOperator/otpUserData", {
+        axios.get("https://tatkal-reservation-system.herokuapp.com/api/otpOperator/otpUserData", {
             headers: {
                 'token': token
             }
@@ -72,7 +72,7 @@ function OTPOperator() {
 
     const logoutMethod = () => {
         const token = localStorage.getItem("token") || '';
-        axios.post("http://localhost:5000/api/internal/logoutRailwayOperator", {
+        axios.post("https://tatkal-reservation-system.herokuapp.com/api/internal/logoutRailwayOperator", {
             email: loggedInState.email,
             token: token
         }).then((res) => {
@@ -87,14 +87,14 @@ function OTPOperator() {
     useEffect(fetchUserData, []); // Initializes the state
 
     const updateOtpVerification = (tokenId) => {
-        axios.patch("http://localhost:5000/api/otpOperator/updateOtpVerification", {
+        axios.patch("https://tatkal-reservation-system.herokuapp.com/api/otpOperator/updateOtpVerification", {
             tokenId: tokenId,
             otpVerification: true
         });
     }
 
     const handlePhoneVerification = (phone1, otpCallback) => {
-        axios.post("http://localhost:5000/api/otpOperator/sendOTP", {
+        axios.post("https://tatkal-reservation-system.herokuapp.com/api/otpOperator/sendOTP", {
             phone: "+91" + phone1.toString()
         }).then((res) => {
             const phone21 = res.data.phone
@@ -111,7 +111,7 @@ function OTPOperator() {
     const handleSubmit = (event, tokenId) => {
         let affectedIndex = userListState.findIndex(element => element.tokenId === tokenId);
 
-        axios.post("http://localhost:5000/api/otpOperator/verifyOTP", {
+        axios.post("https://tatkal-reservation-system.herokuapp.com/api/otpOperator/verifyOTP", {
             phone: userListState[affectedIndex].arr[0],
             hash: userListState[affectedIndex].arr[1],
             otp: userListState[affectedIndex].otpValue
