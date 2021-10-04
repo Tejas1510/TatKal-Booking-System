@@ -82,7 +82,7 @@ function OperatorLogin(props) {
         <div>
             <form>
             <h2 class="text-center my-3">Operator Login Page</h2>
-            <div class="p-5 shadow bg-light my-4 text-center" style={{margin: "auto",width:"50vh"}}>
+            <div class="p-5 shadow bg-light my-4 text-center" style={{margin: "auto",width:"60vh"}}>
                 <TextField color="secondary" id="email" type="email" onBlur={inputHandler} defaultValue={formState.email} name="email" label="Email" />
                 <br /><br />
                 <TextField color="secondary" id="password" type="password" onBlur={inputHandler} defaultValue={formState.password} name="password" label="Password" />
