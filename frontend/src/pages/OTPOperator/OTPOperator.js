@@ -160,21 +160,21 @@ function OTPOperator() {
     const otpStateRenderer = (record) => {
         if (record.otpVerification === true) {
             return (
-                <div>
+                <td>
                     OTP Sent
-                </div>
+                </td>
             );
         }
         if (record.otpState === "not sent") {
             return (
-                <div>
+                <td>
                     <Button variant="contained" color="primary" onClick={() => { sendOTP(record.tokenId, record.mobile_number) }} startIcon={<SendIcon />}>Send OTP</Button>
-                </div>
+                </td>
             );
         }
         else if (record.otpState === "sent" && record.otpVerification === false) {
             return (
-                <div>
+                <td>
                     <p>OTP Sent</p>
                     <TextField id={"otp-" + record.tokenId}
                         label="Enter OTP"
@@ -190,7 +190,7 @@ function OTPOperator() {
                     <br />
                     <br />
                     <Button variant="contained" color="primary" onClick={(event) => { resendOTP(event, record.tokenId, record.mobile_number) }} startIcon={<SendIcon />}>Resend OTP</Button>
-                </div>
+                </td>
             );
         }
     }
@@ -297,7 +297,7 @@ function OTPOperator() {
                     </div>
                 </div>
 
-                <Table striped bordered hover variant="dark">
+                <Table striped bordered hover responsive variant="dark">
                     <thead>
                         <tr>
                         <th>#</th>
@@ -316,10 +316,14 @@ function OTPOperator() {
                                         <td>{record.tokenId}</td>
                                         <td>{record.fullName}</td>
                             
-                                        <td>{
+                                    
+                        
+                                        {
                                                         otpStateRenderer(record)
 
-                                        }</td>
+                                        }
+                            
+                                        
                                         
                                         {record.otpVerification ? <td>Verified</td> : <td class="bg-danger">Not Verified</td>} 
                 
