@@ -187,7 +187,7 @@ function Register() {
       reservationUpTo: userDetailState.reservationUpTo,
       aadharNumber: userDetailState.aadharNumber,
       dateOfTravel: userDetailState.dateOfTravel,
-      tokenId: uuid(),
+      tokenId: uuid().substring(0,6),
       preferenceTrain: {
         train1: preferencesState.train1,
         train2: preferencesState.train2,
@@ -212,7 +212,7 @@ function Register() {
 
     if (errorMessages.length === 0) {
       console.log("FORM SUBMITTED SUCCESSFULLY");
-      const res = axios.post('http://localhost:5000/api/userdata/register', completeForm)
+      const res = axios.post('https://tatkal-reservation-system.herokuapp.com/api/userdata/register', completeForm)
         .then((response) => {
           console.log("response", response);
           setLoadingState(false);
@@ -260,7 +260,9 @@ function Register() {
         <center><h1 style={{ backgroundColor: "#FFFFFFF" }} className="container shadow my-3 p-2 text-white" >Tatkal Form</h1></center>
 
 
+
         <Card style={{ width: "95%", margin: "auto", backgroundColor: "white" }} className="p-2 shadow">
+        <Notifier errorMessages={errorMessagesState} />
           <CardContent>
             <form style={{ textAlign: "left" }}>
               <h5 style={{ color: "#00004d" }}>1. User Details</h5>
@@ -366,11 +368,11 @@ function Register() {
                       disabled={preferencesState.allClass}
                       value={preferencesState.class1}
                       onChange={(event) => { handleTextFieldChange(event, setPreferencesState, preferencesState) }}>
-                      <MenuItem value={"10"}>AC First Class (1AC)</MenuItem>
-                      <MenuItem value={"20"}>AC 2 Tier (2AC)</MenuItem>
-                      <MenuItem value={"30"}>AC 3 Tier (3AC)</MenuItem>
-                      <MenuItem value={"40"}>Sleeper (SL)</MenuItem>
-                      <MenuItem value={"50"}>AC Chair Car (CC)</MenuItem>
+                      <MenuItem value={"AC First Class"}>AC First Class (1AC)</MenuItem>
+                      <MenuItem value={"AC 2 Tier (2AC)"}>AC 2 Tier (2AC)</MenuItem>
+                      <MenuItem value={"AC 3 Tier (3AC)"}>AC 3 Tier (3AC)</MenuItem>
+                      <MenuItem value={"Sleeper (SL)"}>Sleeper (SL)</MenuItem>
+                      <MenuItem value={"AC Chair Car (CC)"}>AC Chair Car (CC)</MenuItem>
                     </Select>
                   </FormControl>
                 </div>
@@ -384,11 +386,11 @@ function Register() {
                       disabled={preferencesState.allClass}
                       value={preferencesState.class2}
                       onChange={(event) => { handleTextFieldChange(event, setPreferencesState, preferencesState) }}>
-                      <MenuItem value={"10"}>AC First Class (1AC)</MenuItem>
-                      <MenuItem value={"20"}>AC 2 Tier (2AC)</MenuItem>
-                      <MenuItem value={"30"}>AC 3 Tier (3AC)</MenuItem>
-                      <MenuItem value={"40"}>Sleeper (SL)</MenuItem>
-                      <MenuItem value={"50"}>AC Chair Car (CC)</MenuItem>
+                      <MenuItem value={"AC First Class (1AC)"}>AC First Class (1AC)</MenuItem>
+                      <MenuItem value={"AC 2 Tier (2AC)"}>AC 2 Tier (2AC)</MenuItem>
+                      <MenuItem value={"AC 3 Tier (3AC)"}>AC 3 Tier (3AC)</MenuItem>
+                      <MenuItem value={"Sleeper (SL)"}>Sleeper (SL)</MenuItem>
+                      <MenuItem value={"AC Chair Car (CC)"}>AC Chair Car (CC)</MenuItem>
                     </Select>
                   </FormControl>
                 </div>
@@ -402,11 +404,11 @@ function Register() {
                       disabled={preferencesState.allClass}
                       value={preferencesState.class3}
                       onChange={(event) => { handleTextFieldChange(event, setPreferencesState, preferencesState) }}>
-                      <MenuItem value={"10"}>AC First Class (1AC)</MenuItem>
-                      <MenuItem value={"20"}>AC 2 Tier (2AC)</MenuItem>
-                      <MenuItem value={"30"}>AC 3 Tier (3AC)</MenuItem>
-                      <MenuItem value={"40"}>Sleeper (SL)</MenuItem>
-                      <MenuItem value={"50"}>AC Chair Car (CC)</MenuItem>
+                      <MenuItem value={"AC First Class (1AC)"}>AC First Class (1AC)</MenuItem>
+                      <MenuItem value={"AC 2 Tier (2AC)"}>AC 2 Tier (2AC)</MenuItem>
+                      <MenuItem value={"AC 3 Tier (3AC)"}></MenuItem>
+                      <MenuItem value={"Sleeper (SL)"}>Sleeper (SL)</MenuItem>
+                      <MenuItem value={"AC Chair Car (CC)"}>AC Chair Car (CC)</MenuItem>
                     </Select>
                   </FormControl>
                 </div>
@@ -612,8 +614,6 @@ function Register() {
             </Button>
           </CardActions>
 
-
-          <Notifier errorMessages={errorMessagesState} />
         </Card>
       </div>
     </div>

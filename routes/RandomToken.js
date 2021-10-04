@@ -1,8 +1,8 @@
 const router = require("express").Router();
 const User = require("../models/User");
 
-var authToken='7ca186fbd3af70ecb3d8cfd4a7271f81';
-var account_sid='ACcac49ea77ef74d9da4dd56fc219ccb27';
+var authToken='bfd1840dfa71619e72417ba31f7ca7ce';
+var account_sid='AC6b62318bc7f96a1f16424b2bc447bdac';
 var twilio=require('twilio');
 var client=new twilio(account_sid,authToken);
 
@@ -13,20 +13,36 @@ function sendSMS(tokenid,mobileNumber) {
   client.messages.create({
   body:`Your token Id for Online Tatkal Reservation is ${tokenid}`,
   to:`${phone}`,
-  from:'+12145062843'
+  from:'+16892154007'
 })
 .then((message)=>console.log(message.sid)); 
 }
 
+function convertDate(inputFormat) {
+  function pad(s) { return (s < 10) ? '0' + s : s; }
+  var d = new Date(inputFormat)
+  return [d.getFullYear(),pad(d.getMonth()+1),pad(d.getDate()), ].join('-')
+}
+
+const sampleSize = ([...arr], n) => {
+  let m = arr.length;
+  while (m) {
+    const i = Math.floor(Math.random() * m--);
+    [arr[m], arr[i]] = [arr[i], arr[m]];
+  }
+  return arr.slice(0, n);
+};
+
+
+
 router.get('/', async(req,res) => {
     try{
-      const userData = await User.aggregate([{ $sample: { size: 2 } }])
+      const date = convertDate(new Date())
+      console.log(date)
+      const subData = await User.find({dateOfTravel:date})
+      const userData = sampleSize(subData,3)
       for (let i = 0; i < userData.length; i++) {
-        if(userData[i].selectedUser===false){
-          sendSMS(userData[i].tokenId,userData[i].mobileNumber
-            )
-          userData[i].selectedUser=true;
-        }
+        sendSMS(userData[i].tokenId,userData[i].mobileNumber)
       }
       res.status(200).send(userData)
     }
